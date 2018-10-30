@@ -1,24 +1,24 @@
 package org.eyeseetea.dhis2.lightsdk.optionsets
 
 import org.amshove.kluent.shouldBe
-import org.eyeseetea.dhis2.lightsdk.common.Dhis2ApiConfig
-import org.eyeseetea.dhis2.lightsdk.common.Dhis2Credentials
+import org.eyeseetea.dhis2.lightsdk.common.D2ApiConfig
+import org.eyeseetea.dhis2.lightsdk.common.D2Credentials
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.ExpectedException
 
-class Dhis2ApiConfigShould {
+class D2ApiConfigShould {
 
     @Rule @JvmField
     var expectedException = ExpectedException.none()
 
     @Test
-    fun `create Dhis2Config successfully`(){
+    fun `create D2Config successfully`(){
 
         val someUrl = "https://someurl.com"
-        val someCredentials = Dhis2Credentials("some username", "some password")
+        val someCredentials = D2Credentials("some username", "some password")
 
-        val dhis2ApiConfig = Dhis2ApiConfig(someUrl, someCredentials)
+        val dhis2ApiConfig = D2ApiConfig(someUrl, someCredentials)
 
         dhis2ApiConfig.url shouldBe someUrl
         dhis2ApiConfig.credentials shouldBe someCredentials
@@ -28,8 +28,8 @@ class Dhis2ApiConfigShould {
     fun `throw illegalArgumentException if url is empty`(){
         expectedException.expect(IllegalArgumentException::class.java)
 
-        val someCredentials = Dhis2Credentials("some username", "some password")
+        val someCredentials = D2Credentials("some username", "some password")
 
-        Dhis2ApiConfig(" ", someCredentials)
+        D2ApiConfig(" ", someCredentials)
     }
 }

@@ -4,15 +4,15 @@ import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.eyeseetea.dhis2.lightsdk.common.BasicAuthInterceptor
-import org.eyeseetea.dhis2.lightsdk.common.Dhis2ApiConfig
+import org.eyeseetea.dhis2.lightsdk.common.D2ApiConfig
 import org.eyeseetea.dhis2.lightsdk.optionsets.OptionSetEndpoint
 import org.eyeseetea.dhis2.lightsdk.optionsets.OptionSetRetrofit
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class Dhis2Api(val dhis2ApiConfig: Dhis2ApiConfig) {
-    val retrofit:Retrofit
+class D2Api(val d2ApiConfig: D2ApiConfig) {
+    private val retrofit:Retrofit
 
     init {
         val apiUrl = getApiUrl()
@@ -37,14 +37,14 @@ class Dhis2Api(val dhis2ApiConfig: Dhis2ApiConfig) {
 
         val client = OkHttpClient.Builder()
                 .addInterceptor(httpLoggingInterceptor)
-                .addInterceptor(BasicAuthInterceptor(dhis2ApiConfig.credentials))
+                .addInterceptor(BasicAuthInterceptor(d2ApiConfig.credentials))
                 .build()
 
         return client
     }
 
     private fun getApiUrl(): HttpUrl? {
-        var url = HttpUrl.parse(dhis2ApiConfig.url)
+        var url = HttpUrl.parse(d2ApiConfig.url)
 
         /*        if (url == null) {
                     throw ApiException.unexpectedError(
