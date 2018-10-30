@@ -3,7 +3,7 @@ package org.eyeseetea.dhis2.lightsdk.optionsets
 import java.util.*
 
 class OptionSetEndpoint internal constructor(val optionSetRetrofit:OptionSetRetrofit){
-    fun getOptionSets():List<OptionSet>{
+    fun getAll():List<OptionSet>{
         try {
             val queryMap = HashMap<String, String>()
 
