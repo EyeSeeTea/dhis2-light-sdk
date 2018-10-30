@@ -4,7 +4,7 @@ import okhttp3.Credentials.basic
 import okhttp3.Interceptor
 import okhttp3.Response
 
-internal class BasicAuthInterceptor(private val credentials: Credentials) : Interceptor {
+internal class BasicAuthInterceptor(private val credentials: Dhis2Credentials) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val base64Credentials = basic(credentials.username, credentials.password)

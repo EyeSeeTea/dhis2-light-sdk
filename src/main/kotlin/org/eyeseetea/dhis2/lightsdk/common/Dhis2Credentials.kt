@@ -1,11 +1,11 @@
 package org.eyeseetea.dhis2.lightsdk.common
 
-class Credentials(val username: String, val password:String){
+class Dhis2Credentials(val username: String, val password:String){
     init {
-        if (username.isEmpty())
+        if (username.isBlank())
             throw IllegalArgumentException("username can not be empty")
 
-        if (password.isEmpty())
+        if (password.isBlank())
             throw IllegalArgumentException("password can not be empty")
     }
 }
