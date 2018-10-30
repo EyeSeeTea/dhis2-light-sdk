@@ -1,7 +1,10 @@
-# dhis2-light-sdk
-![eyeseetea logo][eyeseetealogo] DHIS2 Api Client written in Kotlin [![Build Status](https://travis-ci.org/EyeSeeTea/dhis2-light-sdk.svg?branch=master)](https://travis-ci.org/EyeSeeTea/dhis2-light-sdk)
+# ![eyeseetea logo][eyeseetealogo] DHIS2 Api Client written in Kotlin [![Build Status](https://travis-ci.org/EyeSeeTea/dhis2-light-sdk.svg?branch=master)](https://travis-ci.org/EyeSeeTea/dhis2-light-sdk)
 
-This is an implementation written in Kotlin for the [Dhis2 Api][dhis2Api]. This library is implemented using Kotlin and it is fully compatible with Android.
+This is implementation written in Kotlin for the [Dhis2 Api][dhis2Api]. 
+
+This library does not use database, it's a stateless light implementation for the [Dhis2 Api][dhis2Api]. 
+
+This library is implemented using Kotlin and it is fully compatible with Android.
 
 **IMPORTANT**: This library is under development.
 
