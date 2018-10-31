@@ -8,7 +8,7 @@ import org.junit.rules.TestRule
 import org.junit.runner.Description
 import org.junit.runners.model.Statement
 
-class MockD2ServerRule (var fileReader: FileReader): TestRule {
+class MockD2ServerRule(var fileReader: FileReader) : TestRule {
 
     private val server: MockWebServer
 
@@ -58,7 +58,6 @@ class MockD2ServerRule (var fileReader: FileReader): TestRule {
         response.setBody(body)
         server.enqueue(response)
     }
-
 
     fun takeRequest(): RecordedRequest {
         return server.takeRequest()
