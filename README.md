@@ -13,24 +13,24 @@ This library is implemented using Kotlin and it is fully compatible with Android
 Example of usage written in kotlin
 
 ```kotlin
-        val d2Api = D2Api.Builder()
-                .url("some url")
-                .credentials("some username","some password")
-                .build();
+val d2Api = D2Api.Builder()
+        .url("some url")
+        .credentials("some username","some password")
+        .build();
 
-        val optionSets = d2Api.optionSets().getAll()
+val optionSets = d2Api.optionSets().getAll()
 ```
 
 
 Example of usage written in java
 
 ```java
-        D2Api d2Api = new D2Api.Builder()
-                .url("some url")
-                .credentials("some username","some password")
-                .build();
+D2Api d2Api = new D2Api.Builder()
+        .url("some url")
+        .credentials("some username","some password")
+        .build();
 
-        List<OptionSet> optionSets = d2Api.optionSets().getAll();
+List<OptionSet> optionSets = d2Api.optionSets().getAll();
 ```
 
 
