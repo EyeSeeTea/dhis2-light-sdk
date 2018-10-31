@@ -1,8 +1,7 @@
-package org.eyeseetea.dhis2.lightsdk.optionsets
+package org.eyeseetea.dhis2.lightsdk.common
 
 import org.amshove.kluent.shouldEqual
 import org.eyeseetea.dhis2.lightsdk.D2Api
-import org.eyeseetea.dhis2.lightsdk.common.D2Credentials
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.ExpectedException
