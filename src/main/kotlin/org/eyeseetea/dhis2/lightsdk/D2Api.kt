@@ -12,9 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.net.MalformedURLException
 
 
-class D2Api(private val url: String, private val credentials: D2Credentials) {
-
-
+class D2Api(val url: String, val credentials: D2Credentials) {
     private val retrofit:Retrofit
 
     init {
@@ -68,7 +66,7 @@ class D2Api(private val url: String, private val credentials: D2Credentials) {
 
         fun build(): D2Api {
             if (url == null)
-                throw IllegalArgumentException("url is required")
+                throw java.lang.IllegalArgumentException("url is required")
             if (credentials == null)
                 throw IllegalArgumentException("credentials is required")
 

@@ -1,6 +1,6 @@
 package org.eyeseetea.dhis2.lightsdk.optionsets
 
-import org.amshove.kluent.shouldBe
+import org.amshove.kluent.shouldEqual
 import org.eyeseetea.dhis2.lightsdk.common.D2Credentials
 import org.junit.Rule
 import org.junit.Test
@@ -19,8 +19,8 @@ class D2CredentialsShould {
 
         val credentials = D2Credentials(someUsername,somePassword)
 
-        credentials.username shouldBe someUsername
-        credentials.password shouldBe somePassword
+        credentials.username shouldEqual someUsername
+        credentials.password shouldEqual somePassword
     }
 
     @Test
