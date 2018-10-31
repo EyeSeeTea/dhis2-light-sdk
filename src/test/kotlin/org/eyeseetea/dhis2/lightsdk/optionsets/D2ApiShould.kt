@@ -14,7 +14,7 @@ class D2ApiShould {
     var expectedException = ExpectedException.none()
 
     @Test
-    fun `create D2Api successfully via constructor`(){
+    fun `create D2Api successfully via constructor`() {
 
         val someUrl = "https://someurl.com"
         val someCredentials = D2Credentials("some username", "some password")
@@ -26,7 +26,7 @@ class D2ApiShould {
     }
 
     @Test
-    fun `throw illegalArgumentException if url is not valid via constructor`(){
+    fun `throw illegalArgumentException if url is not valid via constructor`() {
         expectedException.expect(MalformedURLException::class.java)
 
         val someCredentials = D2Credentials("some username", "some password")
@@ -35,14 +35,14 @@ class D2ApiShould {
     }
 
     @Test
-    fun `create D2Api successfully via builder`(){
+    fun `create D2Api successfully via builder`() {
 
         val someUrl = "https://someurl.com"
         val someCredentials = D2Credentials("some username", "some password")
 
         val d2Api = D2Api.Builder()
                 .url(someUrl)
-                .credentials("some username","some password")
+                .credentials("some username", "some password")
                 .build()
 
         d2Api.url shouldEqual someUrl
@@ -50,7 +50,7 @@ class D2ApiShould {
     }
 
     @Test
-    fun `throw illegalArgumentException if url and credentials aren't assigned via builder`(){
+    fun `throw illegalArgumentException if url and credentials aren't assigned via builder`() {
 
         expectedException.expect(IllegalArgumentException::class.java)
 
@@ -59,17 +59,17 @@ class D2ApiShould {
     }
 
     @Test
-    fun `throw illegalArgumentException if url is not assigned via builder`(){
+    fun `throw illegalArgumentException if url is not assigned via builder`() {
 
         expectedException.expect(IllegalArgumentException::class.java)
 
         D2Api.Builder()
-                .credentials("some username","some password")
+                .credentials("some username", "some password")
                 .build()
     }
 
     @Test
-    fun `throw illegalArgumentException if credentials is not assigned via builder`(){
+    fun `throw illegalArgumentException if credentials is not assigned via builder`() {
 
         expectedException.expect(IllegalArgumentException::class.java)
 

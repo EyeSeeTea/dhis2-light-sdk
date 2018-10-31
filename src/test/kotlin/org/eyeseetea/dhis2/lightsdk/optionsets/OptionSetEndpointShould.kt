@@ -2,14 +2,14 @@ package org.eyeseetea.dhis2.lightsdk.optionsets
 
 import org.junit.Test
 
-class OptionSetEndpointShould{
+class OptionSetEndpointShould {
     @Test
     fun return_optionSets() {
-/*        val config = D2ApiConfig("https://data.psi-mis.org",
-                D2Credentials("KEdemo1","Kenyademo1"))
+/*        val d2Api = D2Api.Builder()
+                .url("https://data.psi-mis.org")
+                .credentials("KEdemo1","Kenyademo1")
+                .build()
 
-        val d2Api = D2Api(config)
-
-        val optionSets = d2Api.optionSets().getOptionSets()*/
+        val optionSets = d2Api.optionSets().getAll()*/
     }
 }

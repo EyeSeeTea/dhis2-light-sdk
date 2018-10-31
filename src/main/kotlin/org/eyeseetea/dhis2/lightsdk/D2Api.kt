@@ -11,9 +11,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.net.MalformedURLException
 
-
 class D2Api(val url: String, val credentials: D2Credentials) {
-    private val retrofit:Retrofit
+    private val retrofit: Retrofit
 
     init {
         val apiUrl = createApiUrl()
@@ -21,11 +20,10 @@ class D2Api(val url: String, val credentials: D2Credentials) {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
         httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
 
-        val client =  OkHttpClient.Builder()
+        val client = OkHttpClient.Builder()
                 .addInterceptor(httpLoggingInterceptor)
                 .addInterceptor(BasicAuthInterceptor(credentials))
                 .build()
-
 
         retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
@@ -34,7 +32,7 @@ class D2Api(val url: String, val credentials: D2Credentials) {
                 .build()
     }
 
-    fun optionSets():OptionSetEndpoint{
+    fun optionSets(): OptionSetEndpoint {
         val optionSetRetrofit = retrofit.create(OptionSetRetrofit::class.java)
         return OptionSetEndpoint(optionSetRetrofit)
     }
@@ -53,15 +51,14 @@ class D2Api(val url: String, val credentials: D2Credentials) {
         var url: String? = null
         var credentials: D2Credentials? = null
 
-
-        fun url(url: String): Builder{
+        fun url(url: String): Builder {
             this.url = url
             return this
         }
 
         fun credentials(username: String, password: String): Builder {
-            this.credentials = D2Credentials(username,password)
-            return this;
+            this.credentials = D2Credentials(username, password)
+            return this
         }
 
         fun build(): D2Api {
@@ -70,8 +67,7 @@ class D2Api(val url: String, val credentials: D2Credentials) {
             if (credentials == null)
                 throw IllegalArgumentException("credentials is required")
 
-            return D2Api(this.url!!,this.credentials!!);
+            return D2Api(this.url!!, this.credentials!!)
         }
-
     }
 }

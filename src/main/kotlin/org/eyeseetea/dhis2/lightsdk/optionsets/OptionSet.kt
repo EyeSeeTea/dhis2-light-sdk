@@ -9,4 +9,3 @@ data class OptionSet(
     val options: List<Option>,
     val version: Int
 )
-
