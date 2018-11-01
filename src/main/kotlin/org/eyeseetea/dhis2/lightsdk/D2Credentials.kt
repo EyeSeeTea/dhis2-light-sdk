@@ -1,4 +1,4 @@
-package org.eyeseetea.dhis2.lightsdk.common
+package org.eyeseetea.dhis2.lightsdk
 
 data class D2Credentials(val username: String, val password: String) {
     init {

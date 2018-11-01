@@ -5,7 +5,7 @@ class OptionSetEndpoint internal constructor(val optionSetRetrofit: OptionSetRet
         try {
             val queryMap = HashMap<String, String>()
 
-            queryMap["paging"] = "false"
+            // queryMap["paging"] = "false"
 
             queryMap["fields"] = "id,name,displayName,created,lastUpdated,access," +
                     "version,options[id,name,displayName,created,lastUpdated,access," +
@@ -13,9 +13,9 @@ class OptionSetEndpoint internal constructor(val optionSetRetrofit: OptionSetRet
 
             val call = optionSetRetrofit.getOptionSets(queryMap)
 
-            val optionSetMap = call.execute().body()!!
+            val d2Response = call.execute().body()!!
 
-            return optionSetMap["optionSets"]!!
+            return d2Response.items
         } catch (e: Exception) {
             throw e
         }

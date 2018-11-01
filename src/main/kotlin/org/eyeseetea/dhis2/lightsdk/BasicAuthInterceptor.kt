@@ -1,4 +1,4 @@
-package org.eyeseetea.dhis2.lightsdk.common
+package org.eyeseetea.dhis2.lightsdk
 
 import okhttp3.Credentials.basic
 import okhttp3.Interceptor

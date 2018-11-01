@@ -1,10 +1,11 @@
 package org.eyeseetea.dhis2.lightsdk
 
+import com.google.gson.GsonBuilder
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.eyeseetea.dhis2.lightsdk.common.BasicAuthInterceptor
-import org.eyeseetea.dhis2.lightsdk.common.D2Credentials
+import org.eyeseetea.dhis2.lightsdk.common.D2ResponseDeserializer
+import org.eyeseetea.dhis2.lightsdk.common.models.D2Response
 import org.eyeseetea.dhis2.lightsdk.optionsets.OptionSetEndpoint
 import org.eyeseetea.dhis2.lightsdk.optionsets.OptionSetRetrofit
 import retrofit2.Retrofit
@@ -25,8 +26,16 @@ class D2Api(val url: String, val credentials: D2Credentials) {
                 .addInterceptor(BasicAuthInterceptor(credentials))
                 .build()
 
+        val gson = GsonBuilder()
+            .registerTypeAdapter(
+                D2Response::class.java,
+                D2ResponseDeserializer()
+            )
+            .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+            .create()
+
         retrofit = Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(client)
                 .baseUrl(apiUrl)
                 .build()
