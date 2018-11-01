@@ -1,4 +1,4 @@
-package org.eyeseetea.dhis2.lightsdk.common
+package org.eyeseetea.dhis2.lightsdk
 
 import org.amshove.kluent.shouldEqual
 import org.junit.Rule
@@ -16,7 +16,8 @@ class D2CredentialsShould {
         val someUsername = "some username"
         val somePassword = "some password"
 
-        val credentials = D2Credentials(someUsername, somePassword)
+        val credentials =
+            D2Credentials(someUsername, somePassword)
 
         credentials.username shouldEqual someUsername
         credentials.password shouldEqual somePassword

@@ -1,4 +1,4 @@
-package org.eyeseetea.dhis2.lightsdk.common.reader
+package org.eyeseetea.dhis2.lightsdk.common
 
 import java.io.BufferedReader
 import java.io.File

@@ -1,7 +1,6 @@
-package org.eyeseetea.dhis2.lightsdk.common
+package org.eyeseetea.dhis2.lightsdk
 
 import org.amshove.kluent.shouldEqual
-import org.eyeseetea.dhis2.lightsdk.D2Api
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.ExpectedException
@@ -16,7 +15,8 @@ class D2ApiShould {
     fun `create D2Api successfully via constructor`() {
 
         val someUrl = "https://someurl.com"
-        val someCredentials = D2Credentials("some username", "some password")
+        val someCredentials =
+            D2Credentials("some username", "some password")
 
         val d2Api = D2Api(someUrl, someCredentials)
 
@@ -28,7 +28,8 @@ class D2ApiShould {
     fun `throw illegalArgumentException if url is not valid via constructor`() {
         expectedException.expect(MalformedURLException::class.java)
 
-        val someCredentials = D2Credentials("some username", "some password")
+        val someCredentials =
+            D2Credentials("some username", "some password")
 
         D2Api("Not valid url", someCredentials)
     }
@@ -37,7 +38,8 @@ class D2ApiShould {
     fun `create D2Api successfully via builder`() {
 
         val someUrl = "https://someurl.com"
-        val someCredentials = D2Credentials("some username", "some password")
+        val someCredentials =
+            D2Credentials("some username", "some password")
 
         val d2Api = D2Api.Builder()
                 .url(someUrl)
