@@ -9,7 +9,7 @@ import java.net.MalformedURLException
 class D2ApiShould {
 
     @Rule @JvmField
-    var expectedException = ExpectedException.none()
+    var expectedException = ExpectedException.none()!!
 
     @Test
     fun `create D2Api successfully via constructor`() {

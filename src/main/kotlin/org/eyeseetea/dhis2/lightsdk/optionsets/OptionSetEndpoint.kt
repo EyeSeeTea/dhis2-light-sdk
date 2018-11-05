@@ -1,23 +1,25 @@
 package org.eyeseetea.dhis2.lightsdk.optionsets
 
-class OptionSetEndpoint internal constructor(val optionSetRetrofit: OptionSetRetrofit) {
-    fun getAll(): List<OptionSet> {
-        try {
-            val queryMap = HashMap<String, String>()
+import org.eyeseetea.dhis2.lightsdk.D2Endpoint
+import org.eyeseetea.dhis2.lightsdk.D2Response
+import org.eyeseetea.dhis2.lightsdk.common.models.D2CollectionResponse
 
-            // queryMap["paging"] = "false"
+class OptionSetEndpoint internal constructor(private val optionSetRetrofit: OptionSetRetrofit) :
+    D2Endpoint<D2CollectionResponse<OptionSet>>() {
 
-            queryMap["fields"] = "id,name,displayName,created,lastUpdated,access," +
-                    "version,options[id,name,displayName,created,lastUpdated,access," +
-                    "code,attributeValues[*,attribute[id,code]]]"
+    fun getAll(): D2Response<List<OptionSet>> {
+        val queryMap = HashMap<String, String>()
 
-            val call = optionSetRetrofit.getOptionSets(queryMap)
+        queryMap["paging"] = "false"
 
-            val d2Response = call.execute().body()!!
+        queryMap["fields"] = "id,name,displayName,created,lastUpdated,access," +
+            "version,options[id,name,displayName,created,lastUpdated,access," +
+            "code,attributeValues[*,attribute[id,code]]]"
 
-            return d2Response.items
-        } catch (e: Exception) {
-            throw e
-        }
+        val call = optionSetRetrofit.getOptionSets(queryMap)
+
+        val d2Response = execute(call)
+
+        return d2Response.map { it.items }
     }
 }

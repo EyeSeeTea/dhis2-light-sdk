@@ -9,6 +9,6 @@ data class OptionSet(
     override val id: String,
     override val lastUpdated: Date,
     override val name: String,
-    val options: List<Option>,
+    val options: List<Option>?,
     val version: Int
 ) : IdentifiableObject

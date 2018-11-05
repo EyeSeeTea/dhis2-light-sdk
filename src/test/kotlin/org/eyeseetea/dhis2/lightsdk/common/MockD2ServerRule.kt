@@ -7,13 +7,13 @@ import org.junit.rules.TestRule
 import org.junit.runner.Description
 import org.junit.runners.model.Statement
 
-class MockD2ServerRule(var fileReader: FileReader) : TestRule {
+class MockD2ServerRule(private var fileReader: FileReader) : TestRule {
+    private val okHttpStatusCode = 200
 
     private val server: MockWebServer = MockWebServer()
 
     override fun apply(base: Statement, description: Description): Statement {
         return object : Statement() {
-            @Throws(Throwable::class)
             override fun evaluate() {
                 before()
 
@@ -35,14 +35,14 @@ class MockD2ServerRule(var fileReader: FileReader) : TestRule {
     val baseEndpoint: String
         get() = server.url("/").toString()
 
-    fun enqueueMockResponse(code: Int = OK_CODE, response: String = "{}") {
+    fun enqueueMockResponse(code: Int = okHttpStatusCode, response: String = "{}") {
         val mockResponse = MockResponse()
         mockResponse.setResponseCode(code)
         mockResponse.setBody(response)
         server.enqueue(mockResponse)
     }
 
-    fun enqueueFileMockResponse(code: Int = OK_CODE, fileName: String) {
+    fun enqueueFileMockResponse(code: Int = okHttpStatusCode, fileName: String) {
         val body = fileReader.getStringFromFile(fileName)
         val response = MockResponse()
         response.setResponseCode(code)
@@ -52,9 +52,5 @@ class MockD2ServerRule(var fileReader: FileReader) : TestRule {
 
     fun takeRequest(): RecordedRequest {
         return server.takeRequest()
-    }
-
-    companion object {
-        private const val OK_CODE = 200
     }
 }

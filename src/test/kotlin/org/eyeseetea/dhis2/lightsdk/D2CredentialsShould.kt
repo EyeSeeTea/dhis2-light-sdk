@@ -8,7 +8,7 @@ import org.junit.rules.ExpectedException
 class D2CredentialsShould {
 
     @Rule @JvmField
-    var expectedException = ExpectedException.none()
+    var expectedException = ExpectedException.none()!!
 
     @Test
     fun `create D2Credentials successfully`() {

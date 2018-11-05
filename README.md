@@ -18,19 +18,39 @@ val d2Api = D2Api.Builder()
         .credentials("some username","some password")
         .build();
 
-val optionSets = d2Api.optionSets().getAll()
+val optionSetsResponse = d2Api.optionSets().getAll()
+
+when(optionSetsResponse){
+    is D2Response.Success -> handleSuccess(success.getValue())
+    is D2Response.Error -> handleError(errorResponse)
+}
 ```
 
 
 Example of usage written in java
 
 ```java
-D2Api d2Api = new D2Api.Builder()
-        .url("some url")
-        .credentials("some username","some password")
-        .build();
-
-List<OptionSet> optionSets = d2Api.optionSets().getAll();
+class ExampleClass{
+    void example(){
+        D2Api d2Api = new D2Api.Builder()
+                .url("some url")
+                .credentials("some username","some password")
+                .build();
+        
+        List<OptionSet> optionSetsResponse = d2Api.optionSets().getAll();
+        
+        if (response.isSuccess()) {
+            D2Response.Success<List<OptionSet>> success =
+                    (D2Response.Success<List<OptionSet>>) optionSetsResponse;
+            
+            handleSuccess(success.getValue());        
+        } else {
+            D2Response.Error errorResponse = (D2Response.Error) response;
+            
+            handleError(errorResponse);
+        }        
+    }
+}
 ```
 
 

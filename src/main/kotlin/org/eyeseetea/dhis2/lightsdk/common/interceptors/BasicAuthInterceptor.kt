@@ -1,8 +1,9 @@
-package org.eyeseetea.dhis2.lightsdk
+package org.eyeseetea.dhis2.lightsdk.common.interceptors
 
 import okhttp3.Credentials.basic
 import okhttp3.Interceptor
 import okhttp3.Response
+import org.eyeseetea.dhis2.lightsdk.D2Credentials
 
 internal class BasicAuthInterceptor(private val credentials: D2Credentials) : Interceptor {
 
