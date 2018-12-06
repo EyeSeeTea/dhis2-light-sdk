@@ -6,3 +6,5 @@
 /build
 /captures
 .externalNativeBuild
+/webSample/node_modules
+/webSample/package-lock.json
