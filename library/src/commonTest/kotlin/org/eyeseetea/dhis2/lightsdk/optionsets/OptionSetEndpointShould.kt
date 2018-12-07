@@ -16,11 +16,8 @@ import kotlinx.io.charsets.Charsets
 import kotlinx.io.core.toByteArray
 import kotlinx.serialization.json.JSON
 import org.eyeseetea.dhis2.lightsdk.D2Api
-import org.eyeseetea.dhis2.lightsdk.D2Credentials
 import org.eyeseetea.dhis2.lightsdk.D2Response
-import org.eyeseetea.dhis2.lightsdk.common.error401Response
 import org.eyeseetea.dhis2.lightsdk.common.error500Response
-import org.eyeseetea.dhis2.lightsdk.common.logDebug
 import org.eyeseetea.dhis2.lightsdk.common.models.D2CollectionResponseCustomSerializer
 import org.eyeseetea.dhis2.lightsdk.common.models.Pager
 import org.eyeseetea.dhis2.lightsdk.common.optionSetsResponse
@@ -36,21 +33,15 @@ class OptionSetEndpointShould {
     @Test()
     @kotlin.js.JsName("return_expected_optionSets")
     fun `return expected optionSets`() = executePlatformCall {
-        assertTrue (true)
+        assertTrue(true)
 
-        //val expectedOptionSets = emptyList<OptionSet>()
+        // val expectedOptionSets = emptyList<OptionSet>()
         val expectedOptionSets = givenExpectedOptionSets()
-
-        logDebug("Expected: $expectedOptionSets")
 
         val d2Api = givenD2MockApi(optionSetsResponse())
 
-        logDebug("givenD2MockApi: $d2Api")
-
-        //val response = D2Response.Success<List<OptionSet>>(emptyList())
+        // val response = D2Response.Success<List<OptionSet>>(emptyList())
         val response = d2Api.optionSets().getAll().suspendExecute()
-
-        logDebug("response: $response")
 
         response.fold(
             { error -> fail() },
@@ -62,7 +53,7 @@ class OptionSetEndpointShould {
     fun `return unauthorized error response`() = executePlatformCall {
         val d2Api = givenD2MockApi(error500Response(), 401)
 
-        //val response = D2Response.Error.HttpError(401,null)
+        // val response = D2Response.Error.HttpError(401,null)
         val response = d2Api.optionSets().getAll().suspendExecute()
 
         if (response.isError && response is D2Response.Error.HttpError) {
@@ -72,13 +63,12 @@ class OptionSetEndpointShould {
         }
     }
 
-
     @Test
     @kotlin.js.JsName("return_error_500")
     fun `return internal server error response`() = executePlatformCall {
         val d2Api = givenD2MockApi(error500Response(), 500)
 
-        //val response = D2Response.Error.HttpError(500,null)
+        // val response = D2Response.Error.HttpError(500,null)
         val response = d2Api.optionSets().getAll().suspendExecute()
 
         if (response.isError && response is D2Response.Error.HttpError) {

@@ -25,7 +25,6 @@ class TestUiContext : CoroutineDispatcher() {
     override fun dispatch(context: CoroutineContext, block: Runnable) {
         block.run()
     }
-
 }
 
 @UseExperimental(InternalAPI::class)

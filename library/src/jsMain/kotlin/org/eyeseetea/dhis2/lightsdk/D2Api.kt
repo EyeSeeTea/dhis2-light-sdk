@@ -8,7 +8,3 @@ actual fun <T> executePlatformCall(block: suspend () -> T): dynamic {
         block()
     }
 }
-
-
-
-

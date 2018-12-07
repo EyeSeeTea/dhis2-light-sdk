@@ -32,6 +32,5 @@ class OptionSetEndpoint internal constructor(private val client: HttpClient) :
             logDebug("getAll response: " + response.toString())
             response.map { it.items }
         }
-
     }
 }
