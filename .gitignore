@@ -8,3 +8,4 @@
 .externalNativeBuild
 /webSample/node_modules
 /webSample/package-lock.json
+/webSample/js/bundle.js
