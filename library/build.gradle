@@ -123,52 +123,52 @@ tasks.withType(Test) {
 }
 
 //JS Test configuration with Jest
-apply plugin: 'com.moowork.node'
-node {
-    version = '9.9.0'
-    download = true
-    nodeModulesDir = file("$nodeModulesDir")
-}
-
-task populateNodeModulesForTest {
-    doLast {
-        copy {
-            from jsCompilations.main.output
-            from jsCompilations.test.output
-            jsCompilations.test.runtimeDependencyFiles.each {
-                if (it.exists() && !it.isDirectory()) {
-                    from zipTree(it.absolutePath).matching { include '*.js' }
-                }
-            }
-            into "${buildDir}/../node_modules"
-        }
-    }
-}
-
-task installMocha(type: NpmTask) {
-    args = ['install', 'mocha']
-}
-
-//TODO: This is a direct dependency of kotlinx.io.js - Review!!
-task installTextEncoding(type: NpmTask) {
-    args = ['install', 'text-encoding']
-}
-
-task runMocha(type: NodeTask, dependsOn: [jsJar, populateNodeModulesForTest, installMocha, installTextEncoding]) {
-    script = file("node_modules/mocha/bin/mocha")
-    args = ["node_modules/library_test.js"]
-}
-
-jsTest.dependsOn runMocha
-
-// Fix for https://github.com/srs/gradle-node-plugin/issues/301
-repositories.whenObjectAdded {
-    if (it instanceof IvyArtifactRepository) {
-        metadataSources {
-            artifact()
-        }
-    }
-}
+//apply plugin: 'com.moowork.node'
+//node {
+//    version = '9.9.0'
+//    download = true
+//    nodeModulesDir = file("$nodeModulesDir")
+//}
+//
+//task populateNodeModulesForTest {
+//    doLast {
+//        copy {
+//            from jsCompilations.main.output
+//            from jsCompilations.test.output
+//            jsCompilations.test.runtimeDependencyFiles.each {
+//                if (it.exists() && !it.isDirectory()) {
+//                    from zipTree(it.absolutePath).matching { include '*.js' }
+//                }
+//            }
+//            into "${buildDir}/../node_modules"
+//        }
+//    }
+//}
+//
+//task installMocha(type: NpmTask) {
+//    args = ['install', 'mocha']
+//}
+//
+////TODO: This is a direct dependency of kotlinx.io.js - Review!!
+//task installTextEncoding(type: NpmTask) {
+//    args = ['install', 'text-encoding']
+//}
+//
+//task runMocha(type: NodeTask, dependsOn: [jsJar, populateNodeModulesForTest, installMocha, installTextEncoding]) {
+//    script = file("node_modules/mocha/bin/mocha")
+//    args = ["node_modules/library_test.js"]
+//}
+//
+//jsTest.dependsOn runMocha
+//
+//// Fix for https://github.com/srs/gradle-node-plugin/issues/301
+//repositories.whenObjectAdded {
+//    if (it instanceof IvyArtifactRepository) {
+//        metadataSources {
+//            artifact()
+//        }
+//    }
+//}
 
 task ktlint(type: JavaExec, group: "verification") {
     description = "Check Kotlin code style."
