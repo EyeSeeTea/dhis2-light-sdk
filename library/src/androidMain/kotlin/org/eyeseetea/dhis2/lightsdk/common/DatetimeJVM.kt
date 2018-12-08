@@ -8,14 +8,22 @@ import java.util.Locale
 import java.util.TimeZone
 
 private val GMT_TIMEZONE = TimeZone.getTimeZone("GMT")
+private const val DHIS_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS"
 
 @Suppress("FunctionName")
 actual fun Datetime(timestamp: Long?): Datetime {
-    return Calendar.getInstance(GMT_TIMEZONE, Locale.ROOT)!!.toDatetime(timestamp)
+
+    val calendar = Calendar.getInstance(GMT_TIMEZONE, Locale.ROOT)
+
+    return if (timestamp == null) {
+        calendar.toDatetime(calendar.time.time)
+    } else {
+        calendar.toDatetime(timestamp)
+    }
 }
 
-internal actual fun Datetime.Companion.format(datetime: Datetime): String {
-    val date = Date(datetime.timestamp)
+internal actual fun Datetime.format(): String {
+    val date = Date(timestamp)
 
     return SimpleDateFormat(DHIS_DATE_FORMAT).format(date)
 }

@@ -28,12 +28,16 @@ data class Datetime(
         override val descriptor: SerialDescriptor = DoubleDescriptor
 
         override fun serialize(output: Encoder, obj: Datetime) {
-            output.encodeString(Datetime.format(obj))
+            output.encodeString(obj.format())
         }
 
         override fun deserialize(input: Decoder): Datetime {
             return Datetime.parse(input.decodeString())
         }
+    }
+
+    override fun toString(): String {
+        return format()
     }
 }
 
@@ -41,7 +45,4 @@ data class Datetime(
 expect fun Datetime(timestamp: Long? = null): Datetime
 
 internal expect fun Datetime.Companion.parse(dateString: String): Datetime
-internal expect fun Datetime.Companion.format(datetime: Datetime): String
-
-val Datetime.Companion.DHIS_DATE_FORMAT: String
-    get() = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+internal expect fun Datetime.format(): String

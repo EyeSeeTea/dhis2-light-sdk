@@ -23,7 +23,7 @@ class DatetimeShould {
         val expectedDateString = "2017-09-26T10:02:41.042"
         val datetime = Datetime.parse(expectedDateString)
 
-        val formattedDateTime = Datetime.format(datetime)
+        val formattedDateTime = datetime.format()
 
         assertEquals(expectedDateString, formattedDateTime)
     }

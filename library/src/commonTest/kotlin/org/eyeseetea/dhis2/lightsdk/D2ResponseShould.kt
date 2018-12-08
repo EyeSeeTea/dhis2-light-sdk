@@ -1,5 +1,6 @@
 package org.eyeseetea.dhis2.lightsdk
 
+import org.eyeseetea.dhis2.lightsdk.common.Datetime
 import org.eyeseetea.dhis2.lightsdk.optionsets.Option
 import org.eyeseetea.dhis2.lightsdk.optionsets.OptionSet
 import kotlin.test.Test
@@ -114,7 +115,7 @@ class D2ResponseShould {
     }
 
     private fun givenAOptionSet(name: String = "Example OptionSet"): OptionSet =
-        OptionSet(name, "UID", name, null, 1)
+        OptionSet(Datetime(), Datetime(), name, "UID", name, null, 1)
 
     private fun mapOptionSet(originalOptionSet: OptionSet) =
         originalOptionSet.copy(name = originalOptionSet.name + " mapped")
@@ -124,8 +125,8 @@ class D2ResponseShould {
 
     private fun getOptionsInOptionSet(id: String): D2Response<List<Option>> {
         val options = listOf(
-            Option("name1", "UID1", "name1", "Code1"),
-            Option("name2", "UID2", "name2", "Code2")
+            Option(Datetime(), Datetime(), "name1", "UID1", "name1", "Code1"),
+            Option(Datetime(), Datetime(), "name2", "UID2", "name2", "Code2")
         )
         return D2Response.Success(options)
     }

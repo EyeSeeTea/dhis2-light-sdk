@@ -25,12 +25,9 @@ actual fun Datetime(timestamp: Long?): Datetime {
     }
 }
 
-internal actual fun Datetime.Companion.format(datetime: Datetime): String {
-    var jsDate: Date
+internal actual fun Datetime.format(): String {
+    var jsDate = Date(Date.UTC(year, month, day, hour, minute, second, millisecond))
 
-    with(datetime) {
-        jsDate = Date(Date.UTC(year, month, day, hour, minute, second, millisecond))
-    }
     return jsDate.toISOString().replace("Z", "")
 }
 
