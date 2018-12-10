@@ -5,7 +5,6 @@ import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import org.eyeseetea.dhis2.lightsdk.D2Endpoint
 import org.eyeseetea.dhis2.lightsdk.D2Response
-import org.eyeseetea.dhis2.lightsdk.common.logDebug
 import org.eyeseetea.dhis2.lightsdk.common.models.D2CollectionResponse
 import org.eyeseetea.dhis2.lightsdk.D2Call
 
@@ -18,18 +17,14 @@ class OptionSetEndpoint internal constructor(private val client: HttpClient) :
                 client.get {
                     url { encodedPath = "/api/optionSets" }
                     parameter("paging", false)
-                    // parameter("fields","id,name,displayName,created,lastUpdated,access," +
-                    //    "version,options[id,name,displayName,created,lastUpdated,access," +
-                    // "code,attributeValues[*,attribute[id,code]]]")
                     parameter(
-                        "fields", "id,name,displayName,created,lastUpdated,access," +
-                                "version,options[id,name,displayName,created,lastUpdated,access," +
-                                "code]"
+                        "fields", "id,name,displayName,created,lastUpdated," +
+                            "version,options[id,name,displayName,created,lastUpdated," +
+                            "code,attributeValues[*,attribute[id,code]]]"
                     )
                 }
             }
 
-            logDebug("getAll response: " + response.toString())
             response.map { it.items }
         }
     }

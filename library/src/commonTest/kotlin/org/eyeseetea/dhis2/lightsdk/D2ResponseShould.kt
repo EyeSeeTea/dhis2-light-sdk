@@ -125,8 +125,8 @@ class D2ResponseShould {
 
     private fun getOptionsInOptionSet(id: String): D2Response<List<Option>> {
         val options = listOf(
-            Option(Datetime(), Datetime(), "name1", "UID1", "name1", "Code1"),
-            Option(Datetime(), Datetime(), "name2", "UID2", "name2", "Code2")
+            Option(Datetime(), Datetime(), "name1", "UID1", "name1", "Code1", emptyList()),
+            Option(Datetime(), Datetime(), "name2", "UID2", "name2", "Code2", emptyList())
         )
         return D2Response.Success(options)
     }

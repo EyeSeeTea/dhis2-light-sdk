@@ -106,6 +106,78 @@ fun optionSetsResponse() =
             "          \"attributeValues\": []\n" +
             "        }" +
             "      ]\n" +
-            "    }" +
+            "    }," +
+            "{\n" +
+            "        \"lastUpdated\": \"2017-10-10T01:37:34.493\",\n" +
+            "        \"created\": \"2016-05-05T21:09:21.135\",\n" +
+            "        \"name\": \"HNQIS - InvOuiNon\",\n" +
+            "        \"id\": \"V4mSRAQNrH9\",\n" +
+            "        \"displayName\": \"HNQIS - InvOuiNon\",\n" +
+            "        \"version\": 1,\n" +
+            "        \"access\": {\n" +
+            "            \"read\": true,\n" +
+            "            \"update\": false,\n" +
+            "            \"externalize\": false,\n" +
+            "            \"delete\": false,\n" +
+            "            \"write\": false,\n" +
+            "            \"manage\": false\n" +
+            "        },\n" +
+            "        \"options\": [\n" +
+            "            {\n" +
+            "                \"lastUpdated\": \"2016-06-27T11:33:20.668\",\n" +
+            "                \"code\": \"1\",\n" +
+            "                \"created\": \"2016-05-05T21:10:11.365\",\n" +
+            "                \"name\": \"Oui\",\n" +
+            "                \"id\": \"CVEY7YXlkfv\",\n" +
+            "                \"displayName\": \"Oui\",\n" +
+            "                \"access\": {\n" +
+            "                    \"read\": true,\n" +
+            "                    \"update\": false,\n" +
+            "                    \"externalize\": false,\n" +
+            "                    \"delete\": false,\n" +
+            "                    \"write\": false,\n" +
+            "                    \"manage\": false\n" +
+            "                },\n" +
+            "                \"attributeValues\": [\n" +
+            "                    {\n" +
+            "                        \"lastUpdated\": \"2016-06-27T11:33:21.334\",\n" +
+            "                        \"created\": \"2016-05-05T21:10:11.366\",\n" +
+            "                        \"value\": \"0\",\n" +
+            "                        \"attribute\": {\n" +
+            "                            \"code\": \"OF\",\n" +
+            "                            \"id\": \"DVzuBdj9kli\"\n" +
+            "                        }\n" +
+            "                    }\n" +
+            "                ]\n" +
+            "            },\n" +
+            "            {\n" +
+            "                \"lastUpdated\": \"2016-06-27T11:33:15.301\",\n" +
+            "                \"code\": \"0\",\n" +
+            "                \"created\": \"2016-05-05T21:10:20.604\",\n" +
+            "                \"name\": \"Non\",\n" +
+            "                \"id\": \"kGflIkNgVjC\",\n" +
+            "                \"displayName\": \"Non\",\n" +
+            "                \"access\": {\n" +
+            "                    \"read\": true,\n" +
+            "                    \"update\": false,\n" +
+            "                    \"externalize\": false,\n" +
+            "                    \"delete\": false,\n" +
+            "                    \"write\": false,\n" +
+            "                    \"manage\": false\n" +
+            "                },\n" +
+            "                \"attributeValues\": [\n" +
+            "                    {\n" +
+            "                        \"lastUpdated\": \"2016-06-27T11:33:15.971\",\n" +
+            "                        \"created\": \"2016-05-05T21:10:20.605\",\n" +
+            "                        \"value\": \"1\",\n" +
+            "                        \"attribute\": {\n" +
+            "                            \"code\": \"OF\",\n" +
+            "                            \"id\": \"DVzuBdj9kli\"\n" +
+            "                        }\n" +
+            "                    }\n" +
+            "                ]\n" +
+            "            }\n" +
+            "        ]\n" +
+            "     }" +
             "  ]\n" +
             "}"

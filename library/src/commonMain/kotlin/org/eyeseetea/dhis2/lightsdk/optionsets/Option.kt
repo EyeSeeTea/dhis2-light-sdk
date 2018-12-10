@@ -2,6 +2,7 @@ package org.eyeseetea.dhis2.lightsdk.optionsets
 
 import kotlinx.serialization.Optional
 import kotlinx.serialization.Serializable
+import org.eyeseetea.dhis2.lightsdk.attributes.AttributeValue
 import org.eyeseetea.dhis2.lightsdk.common.Datetime
 
 @Serializable
@@ -11,6 +12,6 @@ data class Option(
     val displayName: String,
     val id: String,
     val name: String,
-    @Optional val code: String? = ""
-
+    @Optional val code: String? = "",
+    @Optional val attributeValues: List<AttributeValue> = emptyList()
 )
