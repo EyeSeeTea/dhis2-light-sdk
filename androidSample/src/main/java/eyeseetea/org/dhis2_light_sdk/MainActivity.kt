@@ -1,4 +1,4 @@
-package eyeseetea.org.dhis2_light_sdk
+package eyeseetea.org.dhis2.lightsdk
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
