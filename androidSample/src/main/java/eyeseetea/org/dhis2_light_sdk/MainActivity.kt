@@ -14,11 +14,11 @@ class MainActivity : AppCompatActivity() {
 
         val d2Api = D2Api.Builder()
             .url("")
-            .credentials("","")
+            .credentials("", "")
             .build();
         val response = d2Api.optionSets().getAll().execute()
 
-        when (response){
+        when (response) {
             is D2Response.Success -> helloTextView.text = response.value.toString()
             is D2Response.Error -> helloTextView.text = response.toString()
         }

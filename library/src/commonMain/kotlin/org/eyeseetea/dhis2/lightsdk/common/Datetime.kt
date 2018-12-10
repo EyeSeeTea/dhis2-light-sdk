@@ -30,7 +30,7 @@ import kotlinx.serialization.internal.DoubleDescriptor
  * @constructor Creates a Datetime.
  */
 @Serializable
-data class Datetime(
+data class Datetime internal constructor(
     val year: Int,
     val month: Int,
     val day: Int,
