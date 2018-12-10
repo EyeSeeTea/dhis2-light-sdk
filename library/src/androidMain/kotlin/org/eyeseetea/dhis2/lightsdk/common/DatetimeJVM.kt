@@ -25,11 +25,17 @@ actual fun Datetime(timestamp: Long?): Datetime {
 internal actual fun Datetime.format(): String {
     val date = Date(timestamp)
 
-    return SimpleDateFormat(DHIS_DATE_FORMAT).format(date)
+    val simpleDateFormat = SimpleDateFormat(DHIS_DATE_FORMAT)
+    simpleDateFormat.timeZone = GMT_TIMEZONE
+
+    return simpleDateFormat.format(date)
 }
 
 internal actual fun Datetime.Companion.parse(dateString: String): Datetime {
-    return Datetime(SimpleDateFormat(DHIS_DATE_FORMAT).parse(dateString).time)
+    val simpleDateFormat = SimpleDateFormat(DHIS_DATE_FORMAT)
+    simpleDateFormat.timeZone = GMT_TIMEZONE
+
+    return Datetime(simpleDateFormat.parse(dateString).time)
 }
 
 fun Datetime.toJVMDate(): Date {
@@ -54,6 +60,6 @@ private fun Calendar.toDatetime(timestamp: Long?): Datetime {
 
     return Datetime(
         year, month, dayOfMonth,
-        hour, seconds, minutes, milliseconds, timeInMillis
+        hour, minutes, seconds, milliseconds, timeInMillis
     )
 }
