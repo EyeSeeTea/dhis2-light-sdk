@@ -95,7 +95,21 @@ dependencies {
     ktlint 'com.github.shyiko:ktlint:0.29.0'
 }
 
+tasks.withType(Test) {
+    testLogging {
+        exceptionFormat "full"
+        events "passed", "failed"
+        showStandardStreams true
+    }
+}
+
 def jsCompilations = kotlin.targets.js.compilations
+
+apply plugin: 'com.moowork.node'
+
+node {
+    download = true
+}
 
 task populateNodeModulesForWebSample(dependsOn: [jsJar]) {
     doLast {
@@ -112,24 +126,25 @@ task populateNodeModulesForWebSample(dependsOn: [jsJar]) {
     }
 }
 
-assemble.dependsOn populateNodeModulesForWebSample
 
-tasks.withType(Test) {
-    testLogging {
-        exceptionFormat "full"
-        events "passed", "failed"
-        showStandardStreams true
-    }
+task installBrowserify(type: NpmTask) {
+    args = ['install', 'browserify']
 }
 
+////TODO: This is a direct dependency of kotlinx.io.js - Review!!
+task installTextEncoding(type: NpmTask) {
+    workingDir = file("${buildDir}/../../webSample/node_modules")
+    args = ['install', 'text-encoding']
+}
+
+task buildJsToWeb(type: NodeTask, dependsOn: [populateNodeModulesForWebSample, installBrowserify, installTextEncoding]) {
+    script = file("node_modules/browserify/bin/cmd")
+    args = ["../webSample/js/sample.js", "-o", "../webSample/js/bundle.js"]
+}
+
+assemble.dependsOn buildJsToWeb
+
 //JS Test configuration with Jest
-//apply plugin: 'com.moowork.node'
-//node {
-//    version = '9.9.0'
-//    download = true
-//    nodeModulesDir = file("$nodeModulesDir")
-//}
-//
 //task populateNodeModulesForTest {
 //    doLast {
 //        copy {
