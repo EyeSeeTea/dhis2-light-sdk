@@ -12,10 +12,10 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Runnable
 import kotlinx.serialization.json.JSON
 import org.eyeseetea.dhis2.lightsdk.common.LogFeature
-import org.eyeseetea.dhis2.lightsdk.common.models.D2CollectionResponseCustomSerializer
 import org.eyeseetea.dhis2.lightsdk.common.models.Pager
 import org.eyeseetea.dhis2.lightsdk.optionsets.Option
 import org.eyeseetea.dhis2.lightsdk.optionsets.OptionSet
+import org.eyeseetea.dhis2.lightsdk.optionsets.OptionSetCollection
 import org.eyeseetea.dhis2.lightsdk.optionsets.OptionSetEndpoint
 import kotlin.coroutines.CoroutineContext
 
@@ -42,7 +42,8 @@ class D2Api(
             client = HttpClient() {
                 install(JsonFeature) {
                     serializer = KotlinxSerializer(JSON.nonstrict).apply {
-                        register(D2CollectionResponseCustomSerializer(OptionSet.serializer()))
+                        // register(D2CollectionResponseCustomSerializer(OptionSet.serializer()))
+                        register(OptionSetCollection.serializer())
                         register(OptionSet.serializer())
                         register(Option.serializer())
                         register(Pager.serializer())

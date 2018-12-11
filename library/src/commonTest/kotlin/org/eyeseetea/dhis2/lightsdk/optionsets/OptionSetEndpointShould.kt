@@ -18,7 +18,6 @@ import kotlinx.serialization.json.JSON
 import org.eyeseetea.dhis2.lightsdk.D2Api
 import org.eyeseetea.dhis2.lightsdk.D2Response
 import org.eyeseetea.dhis2.lightsdk.common.error500Response
-import org.eyeseetea.dhis2.lightsdk.common.models.D2CollectionResponseCustomSerializer
 import org.eyeseetea.dhis2.lightsdk.common.models.Pager
 import org.eyeseetea.dhis2.lightsdk.common.optionSetsResponse
 import org.eyeseetea.dhis2.lightsdk.executePlatformCall
@@ -81,11 +80,10 @@ class OptionSetEndpointShould {
     private fun givenExpectedOptionSets(): List<OptionSet> {
 
         val collectionResponse = JSON.nonstrict.parse(
-            D2CollectionResponseCustomSerializer(OptionSet.serializer()),
-            optionSetsResponse()
+            OptionSetCollection.serializer(), optionSetsResponse()
         )
 
-        return collectionResponse.items
+        return collectionResponse.optionSets
     }
 
     private fun givenD2MockApi(responseBody: String, httpStatusCode: Int = 200): D2Api {
@@ -108,7 +106,7 @@ class OptionSetEndpointShould {
         val client = HttpClient(httpMockEngine) {
             install(JsonFeature) {
                 serializer = KotlinxSerializer(JSON.nonstrict).apply {
-                    register(D2CollectionResponseCustomSerializer(OptionSet.serializer()))
+                    register(OptionSetCollection.serializer())
                     register(OptionSet.serializer())
                     register(Option.serializer())
                     register(Pager.serializer())

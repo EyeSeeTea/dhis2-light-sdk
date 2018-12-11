@@ -7,8 +7,6 @@ import kotlin.js.Date
 actual fun Datetime(timestamp: Long?): Datetime {
     val jsDate = timestamp?.toDouble()?.let { Date(it) } ?: Date()
 
-    logDebug("jsDate $jsDate from timestamp $timestamp")
-
     if (jsDate.getTime().isNaN()) throw InvalidTimestampException(timestamp!!)
 
     with(jsDate) {
