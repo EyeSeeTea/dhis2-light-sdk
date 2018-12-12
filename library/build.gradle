@@ -131,7 +131,7 @@ task installBrowserify(type: NpmTask) {
     args = ['install', 'browserify']
 }
 
-////TODO: This is a direct dependency of kotlinx.io.js - Review!!
+//TODO: This is a direct dependency of kotlinx.io.js - Review!!
 task installTextEncoding(type: NpmTask) {
     workingDir = file("${buildDir}/../../webSample/node_modules")
     args = ['install', 'text-encoding']
@@ -165,11 +165,11 @@ assemble.dependsOn buildJsToWeb
 //}
 //
 ////TODO: This is a direct dependency of kotlinx.io.js - Review!!
-//task installTextEncoding(type: NpmTask) {
+//task installTextEncodingForTest(type: NpmTask) {
 //    args = ['install', 'text-encoding']
 //}
 //
-//task runMocha(type: NodeTask, dependsOn: [jsJar, populateNodeModulesForTest, installMocha, installTextEncoding]) {
+//task runMocha(type: NodeTask, dependsOn: [jsJar, populateNodeModulesForTest, installMocha, installTextEncodingForTest]) {
 //    script = file("node_modules/mocha/bin/mocha")
 //    args = ["node_modules/library_test.js"]
 //}

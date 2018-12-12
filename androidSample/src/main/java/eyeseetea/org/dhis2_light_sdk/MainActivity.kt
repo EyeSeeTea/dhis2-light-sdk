@@ -12,15 +12,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val d2Api = D2Api.Builder()
-            .url("")
-            .credentials("", "")
-            .build();
-        val response = d2Api.optionSets().getAll().execute()
+        requestButton.setOnClickListener {
+            val d2Api = D2Api.Builder()
+                .url(urlEditText.text.toString())
+                .credentials(usernameEditText.text.toString(), passwordEditText.text.toString())
+                .build();
+            val response = d2Api.optionSets().getAll().execute()
 
-        when (response) {
-            is D2Response.Success -> helloTextView.text = response.value.toString()
-            is D2Response.Error -> helloTextView.text = response.toString()
+            when (response) {
+                is D2Response.Success -> helloTextView.text = response.value.toString()
+                is D2Response.Error -> helloTextView.text = response.toString()
+            }
         }
     }
 }
