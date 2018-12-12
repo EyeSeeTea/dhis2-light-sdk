@@ -15,14 +15,10 @@ open class D2Endpoint<T> {
         return try {
             response = block()
 
-            logDebug("Success - " + response.toString())
-
             response?.let { D2Response.Success(response) }!!
         } catch (e: IOException) {
-            logDebug("Error networkConnection: " + e.message)
             D2Response.Error.NetworkConnection(e.message)
         } catch (e: BadResponseStatusException) {
-            logDebug("Error BadResponseStatusException: " + e.message)
             parseHttpError(e.response)
         }
     }
