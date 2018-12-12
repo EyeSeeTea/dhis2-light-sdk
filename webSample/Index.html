@@ -5,8 +5,31 @@
     <title>Console Output</title>
 </head>
 <body>
-<script src="js/sample.js"></script>
-<script src="js/bundle.js"></script>
+<form id="login-form">
+    <div class="imgContainer">
+        <img src="http://eyeseetea.com/sites/default/files/EyeSeeTea-logo.png" alt="Avatar"
+             class="avatar" width="200px">
+    </div>
+    <br/>
 
+    <div class="container">
+        <label><b>Dhis2 Url</b></label>
+        <input id="urlInput" type="text" placeholder="Enter url" name="uname" value="https://"  required>
+
+        <label><b>Username</b></label>
+        <input id="usernameInput" type="text" placeholder="Enter Username" name="uname" required>
+
+        <label><b>Password</b></label>
+        <input id="passwordInput" type="password" placeholder="Enter Password" name="psw" required>
+
+        <button type="submit">Request OptionSets</button>
+    </div>
+</form>
+
+<p id="result">
+
+</p>
+
+<script src="js/bundle.js"></script>
 </body>
 </html>
