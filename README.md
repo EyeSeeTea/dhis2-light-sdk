@@ -86,16 +86,13 @@ To run test in jvm:
   > ./gradlew build
 ```
 
+To run Android Sample execute AndroidSample from Android Studio
+
 
 ## Javascript
 
 There are a web sample app.
 
-To compile to js:
-
-```
-  > ./gradlew buildJsToWeb
-``` 
 
 <img width="400" alt="web-sample-app" src="https://user-images.githubusercontent.com/5593590/49922982-78da3400-feb2-11e8-8bd4-fc621e588eca.png">
 
@@ -106,6 +103,33 @@ To run test in js:
   > ./gradlew jsTest
 ```
 
+To execute web sample
+
+1. Open chrome disabling web security:
+
+For OSX:
+```
+$ open -a Google\ Chrome --args --disable-web-security --user-data-dir
+```
+--user-data-dir required on Chrome 49+ on OSX
+
+For Linux run:
+```
+$ google-chrome --disable-web-security
+```
+
+For Windows go into the command prompt and go into the folder where Chrome.exe is and type:
+```
+chrome.exe --disable-web-security
+```
+
+2. Compile code to js and create bundle.js
+
+execute:
+```
+./gradlew buildJsToWeb
+```
+3. Open web sample index.html under webSample directory
 ## Static code analysis 
 
 This repository use [ktlint] as static code analysis.
