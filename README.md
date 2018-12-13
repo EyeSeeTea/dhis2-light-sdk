@@ -78,6 +78,8 @@ There are a android sample app.
 
 To compile to jvm execute app from Android Studio. 
 
+<img width="200" alt="android-sample-app" src="https://user-images.githubusercontent.com/5593590/49922975-737ce980-feb2-11e8-9967-2da35537413c.png">
+
 To run test in jvm:
 
 ```
@@ -94,6 +96,9 @@ To compile to js:
 ```
   > ./gradlew buildJsToWeb
 ``` 
+
+<img width="400" alt="web-sample-app" src="https://user-images.githubusercontent.com/5593590/49922982-78da3400-feb2-11e8-8bd4-fc621e588eca.png">
+
 
 To run test in js:
 
@@ -124,11 +129,11 @@ Keep in mind that your PRs **must** be validated by Travis-CI. Please, run a loc
 
 ## Libraries used in this project
 
-* [kotlin] [kotlin]
-* [ktor] [ktor]
-* [kotlinx erialization] [kotlinx_serialization]
-* [kotlin test] [kotlin_test]
-* [ktlint] [ktlint]
+* [kotlin][kotlin]
+* [ktor][ktor]
+* [kotlinx erialization][kotlinx_serialization]
+* [kotlin test][kotlin_test]
+* [ktlint][ktlint]
 
 [dhis2Api]: https://docs.dhis2.org/master/en/developer/html/webapi.html
 [kotlin]: https://github.com/JetBrains/kotlin
