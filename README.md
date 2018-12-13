@@ -1,24 +1,26 @@
-# ![eyeseetea logo][eyeseetealogo] DHIS2 Api Client written in Kotlin [![Build Status](https://travis-ci.org/EyeSeeTea/dhis2-light-sdk.svg?branch=master)](https://travis-ci.org/EyeSeeTea/dhis2-light-sdk)
+# ![eyeseetea logo][eyeseetealogo] DHIS2 Api Client multi platform written in Kotlin [![Build Status](https://travis-ci.org/EyeSeeTea/dhis2-light-sdk.svg?branch=master)](https://travis-ci.org/EyeSeeTea/dhis2-light-sdk)
 
 This is implementation written in Kotlin for the [Dhis2 Api][dhis2Api]. 
 
+This a is a multi platform library with javascript and jvm as targets.
+
 This library does not use database, it's a stateless light implementation for the [Dhis2 Api][dhis2Api]. 
 
-This library is implemented using Kotlin and it is fully compatible with Android.
+This library is implemented using Kotlin and it is fully compatible with Android and Javascript.
 
 **IMPORTANT**: This library is under development.
 
 ## Usage
 
-Example of usage written in kotlin
+Example of usage written in Kotlin
 
 ```kotlin
 val d2Api = D2Api.Builder()
         .url("some url")
         .credentials("some username","some password")
-        .build();
+        .build()
 
-val optionSetsResponse = d2Api.optionSets().getAll()
+val optionSetsResponse = d2Api.optionSets().getAll().execute()
 
 when(optionSetsResponse){
     is D2Response.Success -> handleSuccess(success.getValue())
@@ -27,7 +29,7 @@ when(optionSetsResponse){
 ```
 
 
-Example of usage written in java
+Example of usage written in Java
 
 ```java
 class ExampleClass{
@@ -37,7 +39,7 @@ class ExampleClass{
                 .credentials("some username","some password")
                 .build();
         
-        List<OptionSet> optionSetsResponse = d2Api.optionSets().getAll();
+        List<OptionSet> optionSetsResponse = d2Api.optionSets().getAll().execute();
         
         if (response.isSuccess()) {
             D2Response.Success<List<OptionSet>> success =
@@ -53,10 +55,65 @@ class ExampleClass{
 }
 ```
 
+Example of usage written in Javascript
+
+```js
+    var library = require('library');
+
+    var lightsdk = library.org.eyeseetea.dhis2.lightsdk
+
+    var credentials = new lightsdk.D2Credentials(
+            "some username", "some password")
+
+    var d2Api = new lightsdk.D2Api("some url", credentials);
+
+    d2Api.optionSets().getAll().execute()
+        .then((response) => {
+            console.log(response.toString());
+        });
+```
+## Android
+
+There are a android sample app.
+
+To compile to jvm execute app from Android Studio. 
+
+To run test in jvm:
+
+```
+  > ./gradlew build
+```
+
+
+## Javascript
+
+There are a android sample app.
+
+To compile to js:
+
+```
+  > ./gradlew buildJsToWeb
+``` 
+
+To run test in js:
+
+```
+  > ./gradlew jsTest
+```
+
+## Static code analysis 
+
+This repository use [ktlint] as static code analysis.
+
+To run analysis:
+```
+  > ./gradlew ktlint
+```
+
 
 ## Add it to your project
 
-Include the library in your ``build.gradle``
+Pending publish
 
 ## Do you want to contribute?
 
@@ -67,18 +124,16 @@ Keep in mind that your PRs **must** be validated by Travis-CI. Please, run a loc
 
 ## Libraries used in this project
 
-* [OkHttp] [okHttp]
-* [Retrofit] [retrofit]
-* [JUnit] [junit]
-* [Kluent] [kluent]
-* [Mockito] [mockito]
-* [mockwebserver] [mockwebserver]
+* [kotlin] [kotlin]
+* [ktor] [ktor]
+* [kotlinx erialization] [kotlinx_serialization]
+* [kotlin test] [kotlin_test]
+* [ktlint] [ktlint]
 
 [dhis2Api]: https://docs.dhis2.org/master/en/developer/html/webapi.html
-[okHttp]: https://github.com/square/okhttp
-[retrofit]: https://github.com/square/retrofit
-[junit]: https://github.com/junit-team/junit
-[kluent]: https://github.com/MarkusAmshove/Kluent
-[mockito]: https://github.com/mockito/mockito
-[mockwebserver]: https://github.com/square/okhttp/tree/master/mockwebserver
+[kotlin]: https://github.com/JetBrains/kotlin
+[ktor]: https://github.com/ktorio/ktor
+[kotlinx_serialization]: https://github.com/Kotlin/kotlinx.serialization
+[kotlin_test]: https://github.com/kotlintest/kotlintest
+[ktlint]: https://github.com/shyiko/ktlint
 [eyeseetealogo]: https://user-images.githubusercontent.com/5593590/47744878-ac565b80-dc82-11e8-9daa-fe51d1a5a241.png
