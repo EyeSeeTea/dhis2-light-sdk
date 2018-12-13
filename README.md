@@ -89,7 +89,7 @@ To run test in jvm:
 
 ## Javascript
 
-There are a android sample app.
+There are a web sample app.
 
 To compile to js:
 
