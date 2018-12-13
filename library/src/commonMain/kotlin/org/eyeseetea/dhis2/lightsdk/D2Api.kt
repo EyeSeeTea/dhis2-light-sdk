@@ -8,8 +8,6 @@ import io.ktor.client.request.header
 import io.ktor.http.takeFrom
 import io.ktor.util.InternalAPI
 import io.ktor.util.encodeBase64
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Runnable
 import kotlinx.serialization.json.JSON
 import org.eyeseetea.dhis2.lightsdk.common.LogFeature
 import org.eyeseetea.dhis2.lightsdk.common.models.Pager
@@ -17,15 +15,7 @@ import org.eyeseetea.dhis2.lightsdk.optionsets.Option
 import org.eyeseetea.dhis2.lightsdk.optionsets.OptionSet
 import org.eyeseetea.dhis2.lightsdk.optionsets.OptionSetCollection
 import org.eyeseetea.dhis2.lightsdk.optionsets.OptionSetEndpoint
-import kotlin.coroutines.CoroutineContext
-
 expect fun <T> executePlatformCall(block: suspend () -> T): T
-
-class TestUiContext : CoroutineDispatcher() {
-    override fun dispatch(context: CoroutineContext, block: Runnable) {
-        block.run()
-    }
-}
 
 @UseExperimental(InternalAPI::class)
 class D2Api(
