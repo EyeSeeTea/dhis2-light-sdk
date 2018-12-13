@@ -9,6 +9,7 @@ kotlin {
 
     def ktor_version = "1.0.0"
     def serialization_version = "0.9.0"
+    def coroutines_version = "1.0.1"
 
     targets {
         fromPreset(presets.jvm, 'android')
