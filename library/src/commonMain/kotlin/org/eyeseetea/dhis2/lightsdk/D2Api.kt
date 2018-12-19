@@ -15,7 +15,6 @@ import org.eyeseetea.dhis2.lightsdk.optionsets.Option
 import org.eyeseetea.dhis2.lightsdk.optionsets.OptionSet
 import org.eyeseetea.dhis2.lightsdk.optionsets.OptionSetCollection
 import org.eyeseetea.dhis2.lightsdk.optionsets.OptionSetEndpoint
-expect fun <T> executePlatformCall(block: suspend () -> T): T
 
 @UseExperimental(InternalAPI::class)
 class D2Api(

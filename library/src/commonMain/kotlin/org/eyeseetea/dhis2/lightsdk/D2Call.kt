@@ -11,3 +11,5 @@ class D2Call <T> (private val call: suspend () -> D2Response<T>) {
         }
     }
 }
+
+internal expect fun <T> executePlatformCall(block: suspend () -> T): T
