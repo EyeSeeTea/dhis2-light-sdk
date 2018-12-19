@@ -2,6 +2,9 @@
 
 window.onload=function() {
     document.getElementById('login-form').onsubmit=function() {
+
+        document.getElementById("result").innerText = "";
+
         var library = require('library');
 
         var lightsdk = library.org.eyeseetea.dhis2.lightsdk
@@ -10,7 +13,10 @@ window.onload=function() {
                 document.getElementById("usernameInput").value,
                 document.getElementById("passwordInput").value)
 
-        var d2Api = new lightsdk.D2Api(document.getElementById("urlInput").value, credentials);
+        var d2Api = new lightsdk.D2Api(
+                document.getElementById("urlInput").value,
+                credentials,
+                document.getElementById("apiVersion").value);
 
         d2Api.optionSets().getAll().execute()
             .then((response) => {

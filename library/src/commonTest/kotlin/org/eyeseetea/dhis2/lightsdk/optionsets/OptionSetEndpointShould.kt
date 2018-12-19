@@ -17,6 +17,7 @@ import kotlinx.io.core.toByteArray
 import kotlinx.serialization.json.JSON
 import org.eyeseetea.dhis2.lightsdk.D2Api
 import org.eyeseetea.dhis2.lightsdk.D2Response
+import org.eyeseetea.dhis2.lightsdk.common.error404Response
 import org.eyeseetea.dhis2.lightsdk.common.error500Response
 import org.eyeseetea.dhis2.lightsdk.common.models.Pager
 import org.eyeseetea.dhis2.lightsdk.common.optionSetsResponse
@@ -38,6 +39,24 @@ class OptionSetEndpointShould {
         val expectedOptionSets = givenExpectedOptionSets()
 
         val d2Api = givenD2MockApi(optionSetsResponse())
+
+        // val response = D2Response.Success<List<OptionSet>>(emptyList())
+        val response = d2Api.optionSets().getAll().suspendExecute()
+
+        response.fold(
+            { error -> fail() },
+            { successResponse -> assertEquals(expectedOptionSets, successResponse) })
+    }
+
+    @Test()
+    @kotlin.js.JsName("return_expected_optionSets_api_version")
+    fun `return expected optionSets especifing api version`() = executePlatformCall {
+        assertTrue(true)
+
+        // val expectedOptionSets = emptyList<OptionSet>()
+        val expectedOptionSets = givenExpectedOptionSets()
+
+        val d2Api = givenD2MockApi(optionSetsResponse(), apiVersion = "30")
 
         // val response = D2Response.Success<List<OptionSet>>(emptyList())
         val response = d2Api.optionSets().getAll().suspendExecute()
@@ -77,6 +96,20 @@ class OptionSetEndpointShould {
         }
     }
 
+    @Test
+    @kotlin.js.JsName("return_error_404")
+    fun `return not found error response if api version is invalid`() = executePlatformCall {
+        val d2Api = givenD2MockApi(error404Response(), 404, "25")
+
+        val response = d2Api.optionSets().getAll().suspendExecute()
+
+        if (response.isError && response is D2Response.Error.HttpError) {
+            assertEquals(404, response.httpStatusCode)
+        } else {
+            fail()
+        }
+    }
+
     private fun givenExpectedOptionSets(): List<OptionSet> {
 
         val collectionResponse = JSON.nonstrict.parse(
@@ -86,10 +119,14 @@ class OptionSetEndpointShould {
         return collectionResponse.optionSets
     }
 
-    private fun givenD2MockApi(responseBody: String, httpStatusCode: Int = 200): D2Api {
+    private fun givenD2MockApi(responseBody: String, httpStatusCode: Int = 200, apiVersion: String = ""): D2Api {
+        val apiSegment = when {
+            apiVersion.isBlank() -> "/api"
+            else -> "/api/$apiVersion" }
+
         val httpMockEngine = MockEngine {
             when (url.encodedPath) {
-                "/api/optionSets" -> {
+                "$apiSegment/optionSets" -> {
                     MockHttpResponse(
                         call,
                         HttpStatusCode.fromValue(httpStatusCode),
@@ -116,6 +153,7 @@ class OptionSetEndpointShould {
 
         return D2Api.Builder()
             .externalClient(client)
+            .apiVersion(apiVersion)
             .build()
     }
 }

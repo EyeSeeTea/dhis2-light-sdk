@@ -7,14 +7,17 @@ import org.eyeseetea.dhis2.lightsdk.D2Endpoint
 import org.eyeseetea.dhis2.lightsdk.D2Response
 import org.eyeseetea.dhis2.lightsdk.D2Call
 
-class OptionSetEndpoint internal constructor(private val client: HttpClient) :
-    D2Endpoint<OptionSetCollection>() {
+class OptionSetEndpoint internal constructor(
+    private val client: HttpClient,
+    apiVersion: String
+) :
+    D2Endpoint<OptionSetCollection>(apiVersion) {
 
     fun getAll(): D2Call<List<OptionSet>> {
         return D2Call {
             var response: D2Response<OptionSetCollection> = execute {
                 client.get {
-                    url { encodedPath = "/api/optionSets" }
+                    url { encodedPath = "$apiSegment/optionSets" }
                     parameter("paging", false)
                     parameter(
                         "fields", "id,name,displayName,created,lastUpdated," +

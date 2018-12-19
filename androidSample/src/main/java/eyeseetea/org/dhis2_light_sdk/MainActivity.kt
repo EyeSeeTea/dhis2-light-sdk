@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
             val d2Api = D2Api.Builder()
                 .url(urlEditText.text.toString())
                 .credentials(usernameEditText.text.toString(), passwordEditText.text.toString())
+                .apiVersion(apiVersionEditText.text.toString())
                 .build();
             val response = d2Api.optionSets().getAll().execute()
 

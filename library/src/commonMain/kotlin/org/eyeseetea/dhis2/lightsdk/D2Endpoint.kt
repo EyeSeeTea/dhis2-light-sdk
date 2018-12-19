@@ -8,7 +8,16 @@ import kotlinx.serialization.json.JSON
 import org.eyeseetea.dhis2.lightsdk.common.logDebug
 import org.eyeseetea.dhis2.lightsdk.common.models.D2ErrorBody
 
-open class D2Endpoint<T> {
+open class D2Endpoint<T> (private val apiVersion: String) {
+
+    val apiSegment: String
+        get() {
+            return when {
+                apiVersion.isBlank() -> "/api"
+                else -> "/api/$apiVersion"
+            }
+        }
+
     suspend fun execute(block: suspend () -> T): D2Response<T> {
         var response: T
 

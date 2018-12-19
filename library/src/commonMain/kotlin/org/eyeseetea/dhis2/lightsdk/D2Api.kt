@@ -20,6 +20,7 @@ import org.eyeseetea.dhis2.lightsdk.optionsets.OptionSetEndpoint
 class D2Api(
     val urlBase: String,
     val credentials: D2Credentials = D2Credentials.empty(),
+    val apiVersion: String = "",
     externalClient: HttpClient? = null
 ) {
     private val client: HttpClient
@@ -57,13 +58,14 @@ class D2Api(
     }
 
     fun optionSets(): OptionSetEndpoint {
-        return OptionSetEndpoint(client)
+        return OptionSetEndpoint(client, apiVersion)
     }
 
     class Builder {
         private var url: String = "http://localhost"
         private var credentials: D2Credentials = D2Credentials("", "")
         private var externalClient: HttpClient? = null
+        private var apiVersion = ""
 
         fun url(url: String): Builder {
             this.url = url
@@ -80,8 +82,13 @@ class D2Api(
             return this
         }
 
+        fun apiVersion(apiVersion: String): Builder {
+            this.apiVersion = apiVersion
+            return this
+        }
+
         fun build(): D2Api {
-            return D2Api(this.url, this.credentials, this.externalClient)
+            return D2Api(this.url, this.credentials, this.apiVersion, this.externalClient)
         }
     }
 }
