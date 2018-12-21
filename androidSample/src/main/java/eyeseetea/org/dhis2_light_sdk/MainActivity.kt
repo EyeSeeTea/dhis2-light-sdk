@@ -51,6 +51,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun getEndpoints() =
         mapOf(
-            "SystemInfo" to d2Api.appInfo().get(),
+            "SystemInfo" to d2Api.systemInfo().get(),
             "OptionSets" to d2Api.optionSets().getAll())
 }

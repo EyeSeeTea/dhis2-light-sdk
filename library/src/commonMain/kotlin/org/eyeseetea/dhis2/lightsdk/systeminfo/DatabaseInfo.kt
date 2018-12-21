@@ -1,4 +1,4 @@
-package org.eyeseetea.dhis2.lightsdk.appinfo
+package org.eyeseetea.dhis2.lightsdk.systeminfo
 
 import kotlinx.serialization.Serializable
 

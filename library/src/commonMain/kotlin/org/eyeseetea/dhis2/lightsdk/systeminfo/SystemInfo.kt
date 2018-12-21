@@ -1,10 +1,11 @@
-package org.eyeseetea.dhis2.lightsdk.appinfo
+package org.eyeseetea.dhis2.lightsdk.systeminfo
 
 import kotlinx.serialization.Serializable
+import org.eyeseetea.dhis2.lightsdk.common.Datetime
 
 @Serializable
-data class AppInfo(
-    val buildTime: String,
+data class SystemInfo(
+    val buildTime: Datetime,
     val calendar: String,
     val contextPath: String,
     val databaseInfo: DatabaseInfo,
@@ -17,10 +18,10 @@ data class AppInfo(
     val isMetadataVersionEnabled: Boolean,
     val jasperReportsVersion: String,
     val lastAnalyticsTableRuntime: String,
-    val lastAnalyticsTableSuccess: String,
+    val lastAnalyticsTableSuccess: Datetime,
     val metadataSyncEnabled: Boolean,
     val revision: String,
-    val serverDate: String,
+    val serverDate: Datetime,
     val systemId: String,
     val systemName: String,
     val userAgent: String,
