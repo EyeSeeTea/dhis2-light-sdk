@@ -9,6 +9,7 @@ import io.ktor.http.takeFrom
 import io.ktor.util.InternalAPI
 import io.ktor.util.encodeBase64
 import kotlinx.serialization.json.JSON
+import org.eyeseetea.dhis2.lightsdk.appinfo.AppInfoEndpoint
 import org.eyeseetea.dhis2.lightsdk.common.LogFeature
 import org.eyeseetea.dhis2.lightsdk.common.models.Pager
 import org.eyeseetea.dhis2.lightsdk.optionsets.Option
@@ -55,6 +56,10 @@ class D2Api(
                 }
             }
         }
+    }
+
+    fun appInfo(): AppInfoEndpoint {
+        return AppInfoEndpoint(client, apiVersion)
     }
 
     fun optionSets(): OptionSetEndpoint {
