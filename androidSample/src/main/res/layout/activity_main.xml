@@ -59,8 +59,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:hint="@string/password_hint"/>
+                    android:hint="@string/password_hint" />
             </android.support.design.widget.TextInputLayout>
+
+            <Spinner
+                android:id="@+id/endpointSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp" />
             <Button
                 android:id="@+id/requestButton"
                 android:layout_width="match_parent"

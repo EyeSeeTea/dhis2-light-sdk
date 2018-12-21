@@ -3,7 +3,7 @@
     <string name="url_hint">Dhis2 Url</string>
     <string name="password_hint">password</string>
     <string name="protocol_text">https://</string>
-    <string name="request_button_text">Request optionSets</string>
+    <string name="request_button_text">Request</string>
     <string name="username_hint">username</string>
     <string name="api_version_hint">api version</string>
 </resources>
