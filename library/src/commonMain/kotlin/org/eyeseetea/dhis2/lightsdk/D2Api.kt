@@ -16,6 +16,7 @@ import org.eyeseetea.dhis2.lightsdk.optionsets.Option
 import org.eyeseetea.dhis2.lightsdk.optionsets.OptionSet
 import org.eyeseetea.dhis2.lightsdk.optionsets.OptionSetCollection
 import org.eyeseetea.dhis2.lightsdk.optionsets.OptionSetEndpoint
+import org.eyeseetea.dhis2.lightsdk.useraccount.MeEndpoint
 
 @UseExperimental(InternalAPI::class)
 class D2Api(
@@ -64,6 +65,10 @@ class D2Api(
 
     fun optionSets(): OptionSetEndpoint {
         return OptionSetEndpoint(client, apiVersion)
+    }
+
+    fun me(): MeEndpoint {
+        return MeEndpoint(client, apiVersion)
     }
 
     class Builder {
