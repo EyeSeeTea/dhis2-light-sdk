@@ -19,11 +19,7 @@ import org.eyeseetea.dhis2.lightsdk.D2Response
 import org.eyeseetea.dhis2.lightsdk.common.error404Response
 import org.eyeseetea.dhis2.lightsdk.common.error500Response
 import org.eyeseetea.dhis2.lightsdk.common.mocks.systemInfoResponse
-import org.eyeseetea.dhis2.lightsdk.common.models.Pager
 import org.eyeseetea.dhis2.lightsdk.executePlatformCall
-import org.eyeseetea.dhis2.lightsdk.optionsets.Option
-import org.eyeseetea.dhis2.lightsdk.optionsets.OptionSet
-import org.eyeseetea.dhis2.lightsdk.optionsets.OptionSetCollection
 import org.eyeseetea.dhis2.lightsdk.systeminfo.SystemInfo
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -134,12 +130,7 @@ class SystemInfoEndpointShould {
 
         val client = HttpClient(httpMockEngine) {
             install(JsonFeature) {
-                serializer = KotlinxSerializer(JSON.nonstrict).apply {
-                    register(OptionSetCollection.serializer())
-                    register(OptionSet.serializer())
-                    register(Option.serializer())
-                    register(Pager.serializer())
-                }
+                serializer = KotlinxSerializer(JSON.nonstrict)
             }
         }
 
