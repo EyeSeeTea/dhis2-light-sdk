@@ -61,6 +61,10 @@ function loadEndpoints(){
         return d2Api.systemInfo().get();
         };
 
+    endpoints["me"] = function () {
+            return d2Api.me().get();
+            };
+
     endpoints["OptionSets"] = function () {
         return d2Api.optionSets().getAll();
         };
