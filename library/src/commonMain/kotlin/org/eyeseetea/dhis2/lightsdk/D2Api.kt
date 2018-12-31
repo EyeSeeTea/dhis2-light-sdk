@@ -43,7 +43,7 @@ class D2Api(
                     if (credentials != D2Credentials.empty()) {
                         header(
                             "Authorization", "Basic " +
-                                    "${credentials.username}:${credentials.password}".encodeBase64()
+                                "${credentials.username}:${credentials.password}".encodeBase64()
                         )
                     }
                 }
@@ -70,7 +70,10 @@ class D2Api(
         private var apiVersion = ""
 
         fun url(url: String): Builder {
-            this.url = url
+            if (!url.isBlank()) {
+                this.url = url
+            }
+
             return this
         }
 
