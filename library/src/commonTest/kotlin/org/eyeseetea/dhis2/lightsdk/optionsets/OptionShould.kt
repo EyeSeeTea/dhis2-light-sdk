@@ -9,7 +9,7 @@ class OptionShould {
     @Test
     @kotlin.js.JsName("parse_with_null_code")
     fun `parse json string with null code`() {
-        val file = readFile(getPath() + "option_without_code.json")
+        val file = readFile(getPath() + "option_with_null_code.json")
         val option = JSON.nonstrict.parse(Option.serializer(), file)
         assertNotNull(option)
     }
@@ -17,12 +17,12 @@ class OptionShould {
     @Test
     @kotlin.js.JsName("parse_without_code_field")
     fun `parse json string without code field`() {
-        val file = readFile(getPath() + "option.json")
+        val file = readFile(getPath() + "option_without_code.json")
         val option = JSON.nonstrict.parse(Option.serializer(), file)
         assertNotNull(option)
     }
 
     private fun getPath(): String {
-        return "src/commonTest/kotlin/org/eyeseetea/dhis2/lightsdk/resources/"
+        return "src/commonTest/resources/"
     }
 }
