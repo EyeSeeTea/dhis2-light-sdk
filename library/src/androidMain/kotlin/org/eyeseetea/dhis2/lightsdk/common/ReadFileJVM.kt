@@ -11,7 +11,12 @@ internal actual fun readFile(file: String): String {
 }
 
 fun getFixedPath(file: String): String {
-    val path = "/library/src/commonTest/resources/"
+    var path = "/src/commonTest/resources/"
+    val rootProject = "/library"
+
     val rootPath = System.getProperty("user.dir")
+    if (!rootPath.contains(rootProject)) {
+        path = rootProject + path
+    }
     return "$rootPath$path$file"
 }
