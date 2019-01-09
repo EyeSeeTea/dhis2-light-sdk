@@ -1,4 +1,4 @@
-package org.eyeseetea.dhis2.lightsdk.organisationunits
+package org.eyeseetea.dhis2.lightsdk.programs
 
 import kotlinx.serialization.Optional
 import kotlinx.serialization.Serializable

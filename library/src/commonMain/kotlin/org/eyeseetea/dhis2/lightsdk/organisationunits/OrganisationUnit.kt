@@ -3,6 +3,7 @@ package org.eyeseetea.dhis2.lightsdk.organisationunits
 import kotlinx.serialization.Optional
 import kotlinx.serialization.Serializable
 import org.eyeseetea.dhis2.lightsdk.common.Datetime
+import org.eyeseetea.dhis2.lightsdk.programs.Program
 
 @Serializable
 data class OrganisationUnit(
