@@ -11,5 +11,5 @@ data class Program(
     @Optional val displayName: String = "",
     @Optional val id: String = "",
     @Optional val name: String = "",
-    @Optional val programType: String = ""
+    @Optional val programType: ProgramType = ProgramType.WITHOUT_REGISTRATION
 )
