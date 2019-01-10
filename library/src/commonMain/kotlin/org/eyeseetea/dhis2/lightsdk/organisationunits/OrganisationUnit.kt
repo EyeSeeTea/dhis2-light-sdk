@@ -12,5 +12,7 @@ data class OrganisationUnit(
     @Optional val displayName: String = "",
     @Optional val id: String = "",
     @Optional val name: String = "",
+    @Optional val level: Int? = null,
+    @Optional val path: String = "",
     @Optional val programs: List<Program> = emptyList()
 )

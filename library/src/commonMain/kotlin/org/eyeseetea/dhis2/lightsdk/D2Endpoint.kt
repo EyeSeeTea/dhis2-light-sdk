@@ -45,4 +45,13 @@ open class D2Endpoint<T> (private val apiVersion: String) {
         logDebug("Error http  ${response.status.value} D2ErrorBody: " + d2ErrorBody.toString())
         return D2Response.Error.HttpError(response.status.value, d2ErrorBody)
     }
+
+    protected fun buildIdFilter(uidProperty: String, ids: List<String>): String {
+        return StringBuilder()
+            .append(uidProperty)
+            .append(":in:[")
+            .append(ids.joinToString(","))
+            .append("]")
+            .toString()
+    }
 }
