@@ -6,4 +6,5 @@
     <string name="request_button_text">Request</string>
     <string name="username_hint">username</string>
     <string name="api_version_hint">api version</string>
+    <string name="ids_filter_hint">ids to filter</string>
 </resources>

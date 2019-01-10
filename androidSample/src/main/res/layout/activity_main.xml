@@ -67,6 +67,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText android:id="@+id/idsFilterEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/ids_filter_hint" />
+            </android.support.design.widget.TextInputLayout>
+
             <Button
                 android:id="@+id/requestButton"
                 android:layout_width="match_parent"
