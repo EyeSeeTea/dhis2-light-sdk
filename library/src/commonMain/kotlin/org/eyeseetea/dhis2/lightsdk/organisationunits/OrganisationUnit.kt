@@ -2,6 +2,7 @@ package org.eyeseetea.dhis2.lightsdk.organisationunits
 
 import kotlinx.serialization.Optional
 import kotlinx.serialization.Serializable
+import org.eyeseetea.dhis2.lightsdk.attributes.AttributeValue
 import org.eyeseetea.dhis2.lightsdk.common.Datetime
 import org.eyeseetea.dhis2.lightsdk.programs.Program
 
@@ -14,5 +15,6 @@ data class OrganisationUnit(
     @Optional val name: String = "",
     @Optional val level: Int? = null,
     @Optional val path: String = "",
-    @Optional val programs: List<Program> = emptyList()
+    @Optional val programs: List<Program> = emptyList(),
+    @Optional val attributeValues: List<AttributeValue> = emptyList()
 )

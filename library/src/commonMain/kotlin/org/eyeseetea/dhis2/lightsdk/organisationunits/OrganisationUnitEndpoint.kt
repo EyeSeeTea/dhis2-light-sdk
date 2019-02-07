@@ -20,7 +20,7 @@ class OrganisationUnitEndpoint internal constructor(
                     parameter("paging", false)
                     parameter(
                         "fields", "id,name,displayName,created,lastUpdated," +
-                            "path,level,programs[id]," +
+                            "path,level,programs[id,attributeValues[*,attribute[id,code]]]," +
                             "attributeValues[*,attribute[id,code]]"
                     )
 

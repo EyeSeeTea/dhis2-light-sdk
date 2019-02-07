@@ -2,6 +2,7 @@ package org.eyeseetea.dhis2.lightsdk.programs
 
 import kotlinx.serialization.Optional
 import kotlinx.serialization.Serializable
+import org.eyeseetea.dhis2.lightsdk.attributes.AttributeValue
 import org.eyeseetea.dhis2.lightsdk.common.Datetime
 
 @Serializable
@@ -11,5 +12,6 @@ data class Program(
     @Optional val displayName: String = "",
     @Optional val id: String = "",
     @Optional val name: String = "",
-    @Optional val programType: ProgramType? = null
+    @Optional val programType: ProgramType? = null,
+    @Optional val attributeValues: List<AttributeValue> = emptyList()
 )
