@@ -13,6 +13,7 @@ import org.eyeseetea.dhis2.lightsdk.systeminfo.SystemInfoEndpoint
 import org.eyeseetea.dhis2.lightsdk.common.LogFeature
 import org.eyeseetea.dhis2.lightsdk.optionsets.OptionSetEndpoint
 import org.eyeseetea.dhis2.lightsdk.organisationunits.OrganisationUnitEndpoint
+import org.eyeseetea.dhis2.lightsdk.organisationunits.OrganisationUnitLevelEndpoint
 import org.eyeseetea.dhis2.lightsdk.useraccount.MeEndpoint
 
 @UseExperimental(InternalAPI::class)
@@ -66,6 +67,10 @@ class D2Api(
 
     fun organisationUnits(): OrganisationUnitEndpoint {
         return OrganisationUnitEndpoint(client, apiVersion)
+    }
+
+    fun organisationUnitLevels(): OrganisationUnitLevelEndpoint {
+        return OrganisationUnitLevelEndpoint(client, apiVersion)
     }
 
     class Builder {

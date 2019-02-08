@@ -1,0 +1,14 @@
+package org.eyeseetea.dhis2.lightsdk.organisationunits
+
+import kotlinx.serialization.Optional
+import kotlinx.serialization.Serializable
+import org.eyeseetea.dhis2.lightsdk.common.Datetime
+
+@Serializable
+data class OrganisationUnitLevel(
+    @Optional val lastUpdated: Datetime? = null,
+    @Optional val created: Datetime? = null,
+    @Optional val displayName: String = "",
+    @Optional val id: String = "",
+    @Optional val level: Int? = null
+)
