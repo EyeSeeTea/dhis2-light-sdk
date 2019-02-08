@@ -59,15 +59,26 @@ function loadEndpoints(){
 
     endpoints["SystemInfo"] = function () {
         return d2Api.systemInfo().get();
-        };
+    };
 
     endpoints["me"] = function () {
             return d2Api.me().get();
-            };
+     };
 
     endpoints["OptionSets"] = function () {
         return d2Api.optionSets().getAll();
-        };
+     };
+
+    endpoints["OrganisationUnitLevels"] = function () {
+        return d2Api.organisationUnitLevels().getAll();
+    };
+
+    endpoints["OrganisationUnits"] = function () {
+        debugger;
+        var ids = document.getElementById("idsFilterInput").value.split(",");
+
+        return d2Api.organisationUnits().getAll(ids);
+    };
 
     return endpoints;
 }

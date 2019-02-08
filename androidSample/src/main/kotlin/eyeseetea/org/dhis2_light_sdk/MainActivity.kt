@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity() {
             "SystemInfo" to d2Api.systemInfo().get(),
             "me" to d2Api.me().get(),
             "OptionSets" to d2Api.optionSets().getAll(),
+            "OrganisationUnitLevels" to d2Api.organisationUnitLevels().getAll(),
             "OrganisationUnits" to d2Api.organisationUnits().getAll(
-                idsFilterEditText.text.split(",").toList()))
+                idsFilterEditText.text.split(",").toTypedArray()))
 }
