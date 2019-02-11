@@ -1,25 +1,12 @@
 package org.eyeseetea.dhis2.lightsdk.optionsets
 
-import io.ktor.client.HttpClient
-import io.ktor.client.engine.mock.MockEngine
-import io.ktor.client.engine.mock.MockHttpResponse
-import io.ktor.client.features.json.JsonFeature
-import io.ktor.client.features.json.serializer.KotlinxSerializer
-import io.ktor.http.ContentType
-import io.ktor.http.HttpHeaders
-import io.ktor.http.HttpStatusCode
-import io.ktor.http.fullPath
-import io.ktor.http.headersOf
 import io.ktor.util.InternalAPI
-import kotlinx.coroutines.io.ByteReadChannel
-import kotlinx.io.charsets.Charsets
-import kotlinx.io.core.toByteArray
 import kotlinx.serialization.json.JSON
-import org.eyeseetea.dhis2.lightsdk.D2Api
 import org.eyeseetea.dhis2.lightsdk.D2Response
 import org.eyeseetea.dhis2.lightsdk.common.error401Response
 import org.eyeseetea.dhis2.lightsdk.common.error404Response
 import org.eyeseetea.dhis2.lightsdk.common.error500Response
+import org.eyeseetea.dhis2.lightsdk.common.mocks.api.givenD2MockApi
 import org.eyeseetea.dhis2.lightsdk.common.optionSetsResponse
 import org.eyeseetea.dhis2.lightsdk.executePlatformCall
 import kotlin.test.Test
@@ -29,13 +16,17 @@ import kotlin.test.fail
 @UseExperimental(InternalAPI::class)
 class OptionSetEndpointShould {
 
+    companion object {
+        private const val ENDPOINT_SEGMENT = "optionSets"
+    }
+
     @Test()
     @kotlin.js.JsName("return_expected_optionSets")
     fun `return expected optionSets`() = executePlatformCall {
         // val expectedOptionSets = emptyList<OptionSet>()
         val expectedOptionSets = givenExpectedOptionSets()
 
-        val d2Api = givenD2MockApi(optionSetsResponse())
+        val d2Api = givenD2MockApi(ENDPOINT_SEGMENT, optionSetsResponse())
 
         // val response = D2Response.Success<List<OptionSet>>(emptyList())
         val response = d2Api.optionSets().getAll().suspendExecute()
@@ -51,7 +42,7 @@ class OptionSetEndpointShould {
         // val expectedOptionSets = emptyList<OptionSet>()
         val expectedOptionSets = givenExpectedOptionSets()
 
-        val d2Api = givenD2MockApi(optionSetsResponse(), apiVersion = "30")
+        val d2Api = givenD2MockApi(ENDPOINT_SEGMENT, optionSetsResponse(), apiVersion = "30")
 
         // val response = D2Response.Success<List<OptionSet>>(emptyList())
         val response = d2Api.optionSets().getAll().suspendExecute()
@@ -64,7 +55,7 @@ class OptionSetEndpointShould {
     @Test
     @kotlin.js.JsName("return_error_401")
     fun `return unauthorized error response`() = executePlatformCall {
-        val d2Api = givenD2MockApi(error401Response(), 401)
+        val d2Api = givenD2MockApi(ENDPOINT_SEGMENT, error401Response(), 401)
 
         // val response = D2Response.Error.HttpError(401,null)
         val response = d2Api.optionSets().getAll().suspendExecute()
@@ -79,7 +70,7 @@ class OptionSetEndpointShould {
     @Test
     @kotlin.js.JsName("return_error_500")
     fun `return internal server error response`() = executePlatformCall {
-        val d2Api = givenD2MockApi(error500Response(), 500)
+        val d2Api = givenD2MockApi(ENDPOINT_SEGMENT, error500Response(), 500)
 
         // val response = D2Response.Error.HttpError(500,null)
         val response = d2Api.optionSets().getAll().suspendExecute()
@@ -94,7 +85,7 @@ class OptionSetEndpointShould {
     @Test
     @kotlin.js.JsName("return_error_404")
     fun `return not found error response if api version is invalid`() = executePlatformCall {
-        val d2Api = givenD2MockApi(error404Response(), 404, "25")
+        val d2Api = givenD2MockApi(ENDPOINT_SEGMENT, error404Response(), 404, "25")
 
         val response = d2Api.optionSets().getAll().suspendExecute()
 
@@ -112,38 +103,5 @@ class OptionSetEndpointShould {
         )
 
         return collectionResponse.optionSets
-    }
-
-    private fun givenD2MockApi(responseBody: String, httpStatusCode: Int = 200, apiVersion: String = ""): D2Api {
-        val apiSegment = when {
-            apiVersion.isBlank() -> "/api"
-            else -> "/api/$apiVersion" }
-
-        val httpMockEngine = MockEngine {
-            when (url.encodedPath) {
-                "$apiSegment/optionSets" -> {
-                    MockHttpResponse(
-                        call,
-                        HttpStatusCode.fromValue(httpStatusCode),
-                        ByteReadChannel(responseBody.toByteArray(Charsets.UTF_8)),
-                        headersOf(HttpHeaders.ContentType to listOf(ContentType.Application.Json.toString()))
-                    )
-                }
-                else -> {
-                    error("Unhandled ${url.fullPath}")
-                }
-            }
-        }
-
-        val client = HttpClient(httpMockEngine) {
-            install(JsonFeature) {
-                serializer = KotlinxSerializer(JSON.nonstrict)
-            }
-        }
-
-        return D2Api.Builder()
-            .externalClient(client)
-            .apiVersion(apiVersion)
-            .build()
     }
 }
