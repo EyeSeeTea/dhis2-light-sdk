@@ -1,4 +1,4 @@
-package org.eyeseetea.dhis2.lightsdk.optionsets
+package org.eyeseetea.dhis2.lightsdk.organisationunitlevels
 
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.mock.MockEngine
@@ -20,45 +20,43 @@ import org.eyeseetea.dhis2.lightsdk.D2Response
 import org.eyeseetea.dhis2.lightsdk.common.error401Response
 import org.eyeseetea.dhis2.lightsdk.common.error404Response
 import org.eyeseetea.dhis2.lightsdk.common.error500Response
-import org.eyeseetea.dhis2.lightsdk.common.optionSetsResponse
+import org.eyeseetea.dhis2.lightsdk.common.organisationUnitLevelsResponse
 import org.eyeseetea.dhis2.lightsdk.executePlatformCall
+import org.eyeseetea.dhis2.lightsdk.organisationunits.OrganisationUnitLevel
+import org.eyeseetea.dhis2.lightsdk.organisationunits.OrganisationUnitLevelCollection
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.fail
 
 @UseExperimental(InternalAPI::class)
-class OptionSetEndpointShould {
+class OrganisationUnitLevelEndpointShould {
 
     @Test()
-    @kotlin.js.JsName("return_expected_optionSets")
-    fun `return expected optionSets`() = executePlatformCall {
-        // val expectedOptionSets = emptyList<OptionSet>()
-        val expectedOptionSets = givenExpectedOptionSets()
+    @kotlin.js.JsName("return_expected_organisation_unit_levels")
+    fun `return expected organisationUnitLevels`() = executePlatformCall {
+        val expectedOrgUnitLevels = givenExpectedOrganisationUnitLevels()
 
-        val d2Api = givenD2MockApi(optionSetsResponse())
+        val d2Api = givenD2MockApi(organisationUnitLevelsResponse())
 
-        // val response = D2Response.Success<List<OptionSet>>(emptyList())
-        val response = d2Api.optionSets().getAll().suspendExecute()
+        val response = d2Api.organisationUnitLevels().getAll().suspendExecute()
 
         response.fold(
             { error -> fail() },
-            { successResponse -> assertEquals(expectedOptionSets, successResponse) })
+            { successResponse -> assertEquals(expectedOrgUnitLevels, successResponse) })
     }
 
     @Test()
-    @kotlin.js.JsName("return_expected_optionSets_api_version")
-    fun `return expected optionSets especifing api version`() = executePlatformCall {
-        // val expectedOptionSets = emptyList<OptionSet>()
-        val expectedOptionSets = givenExpectedOptionSets()
+    @kotlin.js.JsName("return_expected_organisation_unit_levels_api_version")
+    fun `return expected organisationUnitLevels especifing api version`() = executePlatformCall {
+        val expectedOrgUnitLevels = givenExpectedOrganisationUnitLevels()
 
-        val d2Api = givenD2MockApi(optionSetsResponse(), apiVersion = "30")
+        val d2Api = givenD2MockApi(organisationUnitLevelsResponse(), apiVersion = "30")
 
-        // val response = D2Response.Success<List<OptionSet>>(emptyList())
-        val response = d2Api.optionSets().getAll().suspendExecute()
+        val response = d2Api.organisationUnitLevels().getAll().suspendExecute()
 
         response.fold(
             { error -> fail() },
-            { successResponse -> assertEquals(expectedOptionSets, successResponse) })
+            { successResponse -> assertEquals(expectedOrgUnitLevels, successResponse) })
     }
 
     @Test
@@ -66,8 +64,7 @@ class OptionSetEndpointShould {
     fun `return unauthorized error response`() = executePlatformCall {
         val d2Api = givenD2MockApi(error401Response(), 401)
 
-        // val response = D2Response.Error.HttpError(401,null)
-        val response = d2Api.optionSets().getAll().suspendExecute()
+        val response = d2Api.organisationUnitLevels().getAll().suspendExecute()
 
         if (response.isError && response is D2Response.Error.HttpError) {
             assertEquals(401, response.httpStatusCode)
@@ -81,8 +78,7 @@ class OptionSetEndpointShould {
     fun `return internal server error response`() = executePlatformCall {
         val d2Api = givenD2MockApi(error500Response(), 500)
 
-        // val response = D2Response.Error.HttpError(500,null)
-        val response = d2Api.optionSets().getAll().suspendExecute()
+        val response = d2Api.organisationUnitLevels().getAll().suspendExecute()
 
         if (response.isError && response is D2Response.Error.HttpError) {
             assertEquals(500, response.httpStatusCode)
@@ -96,7 +92,7 @@ class OptionSetEndpointShould {
     fun `return not found error response if api version is invalid`() = executePlatformCall {
         val d2Api = givenD2MockApi(error404Response(), 404, "25")
 
-        val response = d2Api.optionSets().getAll().suspendExecute()
+        val response = d2Api.organisationUnitLevels().getAll().suspendExecute()
 
         if (response.isError && response is D2Response.Error.HttpError) {
             assertEquals(404, response.httpStatusCode)
@@ -105,23 +101,28 @@ class OptionSetEndpointShould {
         }
     }
 
-    private fun givenExpectedOptionSets(): List<OptionSet> {
+    private fun givenExpectedOrganisationUnitLevels(): List<OrganisationUnitLevel> {
 
         val collectionResponse = JSON.nonstrict.parse(
-            OptionSetCollection.serializer(), optionSetsResponse()
+            OrganisationUnitLevelCollection.serializer(), organisationUnitLevelsResponse()
         )
 
-        return collectionResponse.optionSets
+        return collectionResponse.organisationUnitLevels
     }
 
-    private fun givenD2MockApi(responseBody: String, httpStatusCode: Int = 200, apiVersion: String = ""): D2Api {
+    private fun givenD2MockApi(
+        responseBody: String,
+        httpStatusCode: Int = 200,
+        apiVersion: String = ""
+    ): D2Api {
         val apiSegment = when {
             apiVersion.isBlank() -> "/api"
-            else -> "/api/$apiVersion" }
+            else -> "/api/$apiVersion"
+        }
 
         val httpMockEngine = MockEngine {
             when (url.encodedPath) {
-                "$apiSegment/optionSets" -> {
+                "$apiSegment/organisationUnitLevels" -> {
                     MockHttpResponse(
                         call,
                         HttpStatusCode.fromValue(httpStatusCode),
