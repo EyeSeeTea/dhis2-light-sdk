@@ -11,5 +11,6 @@ data class ProgramStage(
     @Optional val displayName: String = "",
     @Optional val id: String = "",
     @Optional val name: String = "",
-    @Optional val programStageDataElements: List<ProgramStageDataElement> = emptyList()
+    @Optional val programStageDataElements: List<ProgramStageDataElement> = emptyList(),
+    @Optional val programStageSections: List<ProgramStageSection> = emptyList()
 )
