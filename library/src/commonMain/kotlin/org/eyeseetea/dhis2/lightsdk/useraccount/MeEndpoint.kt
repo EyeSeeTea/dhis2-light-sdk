@@ -22,7 +22,8 @@ class MeEndpoint internal constructor(
                     parameter(
                         "fields", "id,created,lastUpdated,name,displayName," +
                             "userCredentials[username],attributeValues[value,attribute[id,code]]," +
-                            " organisationUnits[id, programs[id,programType]]"
+                            " organisationUnits[id, programs[id,programType," +
+                            "attributeValues[value,attribute[id,code]]]]"
                     )
                 }
             }
